@@ -7,7 +7,7 @@ css = '''/* begin */
 body {
     font: 12pt Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
                                         /* font: serif */
-    color: #222;                        /* body-gray */
+    color: #1f501f !important;           /* body-gray */
 }
 
 a {
@@ -19,7 +19,7 @@ a:hover {
 }
 
 a:visited {
-    color: #961728;
+    color: #421c52;
 }
 
 hr {
@@ -44,7 +44,7 @@ body {
 }
 
 #header_text a {
-  color: #eeddf9;
+  color: #9aa09a !important;
   text-decoration: none;
 }
 
@@ -110,7 +110,7 @@ sub { top: 0.8ex; }
 .article_title a,
 .permalink a,
 .continue_reading {
-    color: #2c0d2f !important          /* primary-red */
+    color: #732c7b !important;          /* primary-red */
 }
 
 .fullpost_title a {
