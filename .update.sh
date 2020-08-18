@@ -10,7 +10,7 @@ git push --tags origin master
 # push to pypi
 rm -rf ./dist/*
 python3 setup.py sdist
-twine upload dist/*
+twine upload --skip-existing dist/*
 
 # to update docs
 # cd to root dir
