@@ -292,7 +292,9 @@ for rule in sheet:
                 property.priority = 'IMPORTANT'
                 break
         # or simply:
-        rule.style['margin'] = '01.0eM' # or: ('1em', 'important')
+        # rule.style['margin'] = '01.0eM' # or: ('1em', 'important')  
+        
+        # Remind: rule.style['margin'] is not necessary.
 
 
 # cssutils.ser.prefs.resolveVariables == True since 0.9.7b2
