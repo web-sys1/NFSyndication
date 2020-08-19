@@ -30,6 +30,6 @@ setup(
     license = "GNU GPL",
     keywords = "rss, news",
     project_urls={ 
-        'Source': 'https://github.com/web-sys1/NFSyndication/',
+        'Source': 'https://github.com/web-sys1/NFSyndication/'
     }
 )
