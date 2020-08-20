@@ -8,6 +8,7 @@ import configparser
 import feedparser
 import jinja2
 import pytz
+import typing
 
 from NFSyndication.extras import normalise_post
 
@@ -35,14 +36,12 @@ utc = pytz.utc
 START = start.astimezone(utc)
 
 
-Post = collections.namedtuple('Post', [
-    'time',
-    'blog',
-    'title',
-    'author',
-    'link',
-    'body'
-])
+try:
+   Post = typing.NamedTuple('Post', [('time', str), ('blog', str), ('title',str), ('author',str), ('link', str), ('body',str)])
+
+except Exception as exc:
+   print(f'Exception Error: {exc}')
+
 
 def process_entry(entry, blog):
     """
