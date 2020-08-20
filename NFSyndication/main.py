@@ -79,6 +79,7 @@ for url in SUBSCRIPTIONS:
     try:
         blog = feed['feed']['title']
     except KeyError:
+        raise IndexError(f"{feed.bozo_exception} \n\n{(f'Could not fetch URL(s): {url}')}")
         continue
     for entry in feed['entries']:
         post = process_entry(entry, blog)
