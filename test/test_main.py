@@ -60,6 +60,5 @@ subscriptions = [
   'http://doingthatwrong.com/?format=rss']
   
 with open(f'feeds.txt', 'w', encoding='utf8') as f:
+    NFSconfig.init()
     f.write(",".join(subscriptions).replace(',', '\n'))
-
-NFSconfig.init()
