@@ -1,3 +1,7 @@
+""" Setup for NFSyndication
+ See: https://packaging.python.org/guides/distributing-packages-using-setuptools/
+"""
+
 from os.path import dirname, abspath, join, exists
 from setuptools import setup, find_packages
 from NFSyndication import __version__
@@ -25,4 +29,7 @@ setup(
     install_requires=install_reqs,
     license = "GNU GPL",
     keywords = "rss, news",
+    project_urls={ 
+        'Source': 'https://github.com/web-sys1/NFSyndication/'
+    }
 )

@@ -1,0 +1,10 @@
+language: python
+# Technically we work on 3.3 as well, but hypothesis doesn't...
+python:
+  - "3.7"
+  - "3.8"
+# command to install dependencies
+install:
+  - python setup.py install
+# command to run tests
+script: pytest test

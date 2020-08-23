@@ -3,7 +3,8 @@
 import cssutils
 # You can decode the cssText in ASCII using the function sheet.cssText.decode('ascii') before writing to CSS file
 
-css = '''/* begin */
+css = '''
+       /* begin */
 body {
     font: 12pt Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
                                         /* font: serif */
@@ -76,8 +77,7 @@ pre {
     overflow-x: auto;
 }
 
-
-/*------------------------------------*\
+/*------------------------------------*
   # Footnotes
 \*------------------------------------*/
 
@@ -103,7 +103,7 @@ sub { top: 0.8ex; }
 
 
 
-/*------------------------------------*\
+/*------------------------------------*
   # Article titles
 \*------------------------------------*/
 
@@ -149,7 +149,7 @@ sub { top: 0.8ex; }
 
 
 
-/*------------------------------------*\
+/*------------------------------------*
   # Blockquotes
 \*------------------------------------*/
 
@@ -169,7 +169,7 @@ blockquote p {
 
 
 
-/*------------------------------------*\
+/*------------------------------------*
   # Tweets
 \*------------------------------------*/
 
@@ -292,7 +292,9 @@ for rule in sheet:
                 property.priority = 'IMPORTANT'
                 break
         # or simply:
-        rule.style['margin'] = '01.0eM' # or: ('1em', 'important')
+        # rule.style['margin'] = '01.0eM' # or: ('1em', 'important')  
+        
+        # Remind: rule.style['margin'] is not necessary.
 
 
 # cssutils.ser.prefs.resolveVariables == True since 0.9.7b2
