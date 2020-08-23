@@ -18,7 +18,7 @@ setup(
          ]
         },
     package_data = {'NFSyndication': ['templates/*.html']},
-    description= "News Feed Syndication - A package that read and fetch RSS feeds from the publications.",
+    description= "A package that read and fetch RSS feeds from the publications.",
     long_description=long_description,
     author = "Web SRC",
     author_email = "web.system.management@gmail.com",
