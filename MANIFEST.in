@@ -3,4 +3,5 @@ include README.rst
 include LICENSE
 
 recursive-exclude * __pycache__
-recursive-exclude * .github.com
+recursive-exclude * .github
+recursive-exclude * .vs
