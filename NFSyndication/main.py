@@ -8,6 +8,7 @@ import configparser
 import feedparser
 import jinja2
 import pytz
+import typing
 
 from NFSyndication.extras import normalise_post
 
@@ -35,14 +36,12 @@ utc = pytz.utc
 START = start.astimezone(utc)
 
 
-Post = collections.namedtuple('Post', [
-    'time',
-    'blog',
-    'title',
-    'author',
-    'link',
-    'body'
-])
+try:
+   Post = typing.NamedTuple('Post', [('time', str), ('blog', str), ('title',str), ('author',str), ('link', str), ('body',str)])
+
+except Exception as exc:
+   print(f'Exception Error: {exc}')
+
 
 def process_entry(entry, blog):
     """
@@ -80,6 +79,7 @@ for url in SUBSCRIPTIONS:
     try:
         blog = feed['feed']['title']
     except KeyError:
+        raise IndexError(f"{feed.bozo_exception} \n\n{(f'Could not fetch URL(s): {url}')}")
         continue
     for entry in feed['entries']:
         post = process_entry(entry, blog)
