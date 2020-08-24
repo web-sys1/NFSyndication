@@ -8,7 +8,7 @@ for main.py doesn't get polluted with nitpicks and tweaks.
 import collections
 
 # List of keywords to filter
-FILTER_WORDS = ['coffee', 'yankees', 'apple watch']
+FILTER_WORDS = ['*']
 
 
 ExtendedPost = collections.namedtuple('Post', [
