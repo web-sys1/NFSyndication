@@ -1,4 +1,3 @@
 [console_scripts]
-nfsyndication-releasecss = NFSyndication.config:hold_stylesheet
-nfsyndication-src = NFSyndication.config:init
+nfsyndication-src = NFSyndication:main
 

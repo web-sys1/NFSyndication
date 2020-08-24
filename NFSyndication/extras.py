@@ -8,7 +8,7 @@ for main.py doesn't get polluted with nitpicks and tweaks.
 import collections
 
 # List of keywords to filter
-FILTER_WORDS = ['*']
+FILTER_WORDS = ['coffee', 'yankees', 'apple watch']
 
 
 ExtendedPost = collections.namedtuple('Post', [
@@ -43,8 +43,8 @@ def normalise_post(post):
 
     if any(word.lower() in post.body.lower() for word in FILTER_WORDS):
         return None
-
-    """if (blog == 'Marco.org'):
+    
+    if (blog == 'Marco.org'):
         if ('coffee' in post.body):
             return None
         if post.title.startswith(u'→'):
@@ -63,5 +63,5 @@ def normalise_post(post):
     elif (blog == 'Erica Sadun') and (post.author == 'erica'):
         return ExtendedPost(post.time, post.blog, post.title,
                             None, post.link, post.body, None)
-    """
+
     return ExtendedPost(*post, permalink=None)

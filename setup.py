@@ -17,12 +17,11 @@ setup(
     packages = find_packages(),
     entry_points = {
         'console_scripts': [ 
-            'nfsyndication-src = NFSyndication.config:init',
-            'nfsyndication-releasecss = NFSyndication.config:hold_stylesheet'            
+            'nfsyndication-src = NFSyndication:main',
          ]
         },
     package_data = {'NFSyndication': ['templates/*.html']},
-    description= "A package that read and fetch RSS feeds from the publications.",
+    description= "News Feed Syndication - A package that read and fetch RSS feeds from the publications.",
     long_description=long_description,
     author = "Web SRC",
     author_email = "web.system.management@gmail.com",
@@ -32,4 +31,4 @@ setup(
     project_urls={ 
         'Source': 'https://github.com/web-sys1/NFSyndication/'
     }
-)
+ )

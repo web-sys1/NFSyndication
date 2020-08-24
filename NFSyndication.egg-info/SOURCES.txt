@@ -15,3 +15,4 @@ NFSyndication.egg-info/entry_points.txt
 NFSyndication.egg-info/requires.txt
 NFSyndication.egg-info/top_level.txt
 NFSyndication/templates/template.html
+test/test_main.py

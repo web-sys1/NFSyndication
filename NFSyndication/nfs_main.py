@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# coding=utf8
+# coding=utf-8
 import os
 import collections
 from datetime import datetime, timedelta
@@ -16,6 +16,9 @@ config = configparser.ConfigParser()
 # Get a list of feed URLs
 with open('feeds.txt') as f:
     SUBSCRIPTIONS = list(f)
+
+def fetch_content():
+   feed = feedparser.parse(url)
 
 # Date and time setup. I want only posts from "today" and "yesterday",
 # where the day lasts until 2 AM.
@@ -86,6 +89,7 @@ for url in SUBSCRIPTIONS:
         if post:
             posts.append(post)
     print(feed)
+   
 # Get the template, and drop in the posts
 dir_path = os.path.dirname(os.path.realpath(__file__))
 with open(f'{dir_path}/templates/template.html', encoding='utf8') as f:
