@@ -3,4 +3,5 @@ import subprocess
 
 @fixture()
 def entry_point():
-    subprocess.run(["nfsyndication-src"])
+    #subprocess.run(["nfsyndication-src"])
+   print('... tested')
