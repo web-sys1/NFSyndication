@@ -16,7 +16,6 @@ Run the command:
 ``nfsyndication-src``
 
 Assuming nothing goes wrong, the posts will be written to ``HTML`` file.
-file.
 
 Bug fix
 -------
