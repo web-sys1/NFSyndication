@@ -3,8 +3,7 @@ import NFSyndication
 import subprocess
 from NFSyndication.config import init as NFS_init
 
-class SourcePovider():
-  def __init__(self):
+def conf():
     """ We use these conditions to check the statement"""
     subscriptions = [
      'http://feedpress.me/512pixels',
@@ -16,12 +15,9 @@ class SourcePovider():
      f.write(",".join(subscriptions).replace(',', '\n'))
     self.entry_point()
     
-    
-  def entry_point(self):
+def entry_point():
     """Then initialize code."""
     return NFS_init()
-    print('done')
-
-
-SourcePovider()
-  
+    
+def test_funcfast():
+    pass
