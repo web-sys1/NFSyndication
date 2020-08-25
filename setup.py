@@ -31,7 +31,7 @@ setup(
     project_urls={ 
         'Source': 'https://github.com/web-sys1/NFSyndication/'
     },
-     classifiers=[
+    classifiers=[
         'Development Status :: 3 - Alpha',
         'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
@@ -44,5 +44,10 @@ setup(
         'Topic :: Internet',
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Topic :: Text Processing :: Markup :: HTML'
-        ]
+        ],
+    extras_require={
+          'dev': ['twine', 'wheel'],
+          # 'doc': ['sphinx', 'cartouche'],
+          'test': ['hypothesis>=1.11', 'pytest>=3.0.7'],
+      },
  )
