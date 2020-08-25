@@ -14,7 +14,7 @@ install_reqs = [req for req in open(abspath(join(dirname(__file__), 'requirement
 setup(
     name = "NFSyndication",
     version = __version__,
-    packages = find_packages(),
+    packages=find_packages(exclude=['test', 'test.*']),
     entry_points = {
         'console_scripts': [ 
             'nfsyndication-src = NFSyndication:main',
