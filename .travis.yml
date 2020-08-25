@@ -7,4 +7,4 @@ python:
 install:
   - python setup.py install
 # command to run tests
-script: pytest test
+script: pytest test -k test_main.py
