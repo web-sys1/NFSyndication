@@ -8,4 +8,4 @@ install:
   - python setup.py install
   #- pip install -e ".[test]"
 # command to run tests
-script: pytest testcase.py
+script: python testcase.py
