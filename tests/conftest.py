@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
+
 """
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in the
@@ -17,25 +16,30 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import pytest
 import os, glob
 import NFSyndication
-
+import subprocess
 from NFSyndication.config import init as NFS_init
 
-@pytest.fixture()
-def ckd():
-  subscriptions = [
-   'http://feedpress.me/512pixels',
-   'http://www.leancrew.com/all-this/feed/',
-   'http://ihnatko.com/feed/',
-   'http://blog.ashleynh.me/feed']
+class SourcePovider():
+  def __init__(self):
+    """ We use these conditions to check the statement"""
+    subscriptions = [
+     'http://feedpress.me/512pixels',
+     'http://www.leancrew.com/all-this/feed/',
+     'http://ihnatko.com/feed/',
+     'http://blog.ashleynh.me/feed']
   
-   with open(f'feeds.txt', 'w', encoding='utf8') as f:
+    with open(f'feeds.txt', 'w', encoding='utf8') as f:
      f.write(",".join(subscriptions).replace(',', '\n'))
+    self.entry_point()
     
-@pytest.fixture()
-def entry_point():
-  return NFS_init()
+    
+  def entry_point(self):
+    """Then initialize code."""
+    return NFS_init()
+    print('done')
 
 
+SourcePovider()
+  
