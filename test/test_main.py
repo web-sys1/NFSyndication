@@ -1,8 +1,6 @@
 from NFSyndication import config as NFSconfig
 import os
 
-os.mkdir('output')
-
 subscriptions = [
   'http://feedpress.me/512pixels',
   'http://www.leancrew.com/all-this/feed/',
