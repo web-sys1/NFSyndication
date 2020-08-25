@@ -14,7 +14,7 @@ install_reqs = [req for req in open(abspath(join(dirname(__file__), 'requirement
 setup(
     name = "NFSyndication",
     version = __version__,
-    packages=find_packages(exclude=['test', 'test.*']),
+    packages=find_packages(exclude=['test', 'test.*', 'testcase.py']),
     entry_points = {
         'console_scripts': [ 
             'nfsyndication-src = NFSyndication:main',
@@ -44,10 +44,5 @@ setup(
         'Topic :: Internet',
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Topic :: Text Processing :: Markup :: HTML'
-        ],
-    extras_require={
-          'dev': ['twine', 'wheel'],
-          # 'doc': ['sphinx', 'cartouche'],
-          'test': ['hypothesis>=1.11', 'pytest>=3.0.7'],
-      },
+        ]
  )
