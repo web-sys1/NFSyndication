@@ -10,7 +10,4 @@ subscriptions = [
 with open(f'feeds.txt', 'w', encoding='utf8') as f:
     f.write(",".join(subscriptions).replace(',', '\n'))
 
-def entry_point():
-  return NFS_init()
-
-print(entry_point())
+ NFS_init()
