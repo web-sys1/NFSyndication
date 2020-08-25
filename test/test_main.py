@@ -10,4 +10,4 @@ subscriptions = [
 with open(f'feeds.txt', 'w', encoding='utf8') as f:
     f.write(",".join(subscriptions).replace(',', '\n'))
 
- NFS_init()
+NFS_init()
