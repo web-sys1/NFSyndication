@@ -13,6 +13,4 @@ with open(f'feeds.txt', 'w', encoding='utf8') as f:
     f.write(",".join(subscriptions).replace(',', '\n'))
 """
 
-feed = feedparser.parse('http://www.leancrew.com/all-this/feed/')
-
-print(feed)
+print('os.f')
