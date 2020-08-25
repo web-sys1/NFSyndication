@@ -1,7 +1,9 @@
-from NFSyndication import main as NFS_init
+#!usr/bin/python
+#from NFSyndication import main as NFS_init
+import feedparser
 import os
 
-subscriptions = [
+"""subscriptions = [
   'http://feedpress.me/512pixels',
   'http://www.leancrew.com/all-this/feed/',
   'http://ihnatko.com/feed/',
@@ -9,5 +11,8 @@ subscriptions = [
   
 with open(f'feeds.txt', 'w', encoding='utf8') as f:
     f.write(",".join(subscriptions).replace(',', '\n'))
+"""
 
-NFS_init()
+feed = feedparser.parse('http://www.leancrew.com/all-this/feed/')
+
+print(feed)
