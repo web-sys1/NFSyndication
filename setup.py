@@ -30,5 +30,19 @@ setup(
     keywords = "rss, news",
     project_urls={ 
         'Source': 'https://github.com/web-sys1/NFSyndication/'
-    }
+    },
+     classifiers=[
+        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
+        'Environment :: Web Environment',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: GNU Library or Lesser General Public License (LGPL)',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Topic :: Internet',
+        'Topic :: Software Development :: Libraries :: Python Modules',
+        'Topic :: Text Processing :: Markup :: HTML'
+        ]
  )
