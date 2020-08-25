@@ -1,9 +1,9 @@
-import os, glob
+import os
 import NFSyndication
 import subprocess
 from NFSyndication import main as NFS_init
 
-def conf():
+def entry_point():
     """ We use these conditions to check the statement"""
     subscriptions = [
      'http://feedpress.me/512pixels',
@@ -13,8 +13,8 @@ def conf():
   
     with open(f'feeds.txt', 'w', encoding='utf8') as f:
      f.write(",".join(subscriptions).replace(',', '\n'))
-    
-def entry_point():
-    """Then initialize code."""
     return NFS_init()
-    
+
+
+"""Then initialize code."""
+entry_point()
