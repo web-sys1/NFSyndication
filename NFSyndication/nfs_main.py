@@ -9,16 +9,16 @@ import feedparser
 import jinja2
 import pytz
 import typing
+import sys
 
-from NFSyndication.extras import normalise_post
+from NFSyndication.extras import normalise_post, fetch_content
 
 config = configparser.ConfigParser()
+
 # Get a list of feed URLs
 with open('feeds.txt') as f:
     SUBSCRIPTIONS = list(f)
 
-def fetch_content():
-   feed = feedparser.parse(url)
 
 # Date and time setup. I want only posts from "today" and "yesterday",
 # where the day lasts until 2 AM.
@@ -73,8 +73,7 @@ def process_entry(entry, blog):
     except KeyError:
         body = entry['summary']
 
-    return normalise_post(Post(when, blog, title, author, link, body))
-
+    return normalise_post(Post(when, blog, title, author, link, body))    
 
 posts = []
 for url in SUBSCRIPTIONS:
@@ -82,13 +81,17 @@ for url in SUBSCRIPTIONS:
     try:
         blog = feed['feed']['title']
     except KeyError:
-        raise Exception(f"{feed.bozo_exception} \n\n{(f'Could not fetch URL(s): {url}')}")
+        raise Exception(f"[{feed.bozo_exception or 'unexpected error.'}] \n{(f'Could not fetch URL(s): {url}')}")
+        sys.exit(-1)
         continue
     for entry in feed['entries']:
         post = process_entry(entry, blog)
         if post:
             posts.append(post)
-    print(feed)
+    try:
+      fetch_content(url)
+    except:
+      raise SystemExit
    
 # Get the template, and drop in the posts
 dir_path = os.path.dirname(os.path.realpath(__file__))
