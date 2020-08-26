@@ -1,12 +1,12 @@
 #!/usr/bin/python 
 import sys
-from colored import  fg, bg, attr
+
 
 def init():
   try:
    from NFSyndication import nfs_main, styles
   except Exception as e:
-   print(f"%s%sFatal: {e} %s"%(fg(1),bg(0),attr('reset')))
+   print(f"Fatal: {e}")
    sys.exit(1)
   
   #return os.popen(f'{dir_path}/nfs_main.py').read()
