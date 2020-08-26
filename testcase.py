@@ -1,3 +1,4 @@
+'''
 import os
 import NFSyndication
 import subprocess
@@ -18,6 +19,7 @@ def entry_point():
 
 """Then initialize code."""
 entry_point()
+'''
 
 from printy import printy
 printy("Text with a bold blue color and underlined", 'bBU')
