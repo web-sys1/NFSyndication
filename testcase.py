@@ -20,6 +20,6 @@ def entry_point():
 """Then initialize code."""
 entry_point()
 '''
-
+from printy import printy
 my_dict = {'id': 71, 'zip_codes': ['050001', '050005', '050011', '050015', '050024'], 'code': '05001', 'country': {'code': 'co'}, 'city_translations': [{'language_code': 'es', 'name': 'Medellín'}], 'flag': None}
 printy(my_dict)
