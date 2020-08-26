@@ -10,9 +10,12 @@ from datetime import datetime
 #from time import mktime
 #def format_datetime(struct_time):
     #return datetime.fromtimestamp(mktime(struct_time))
+import colorful as cf
 
 # List of keywords to filter
 FILTER_WORDS = ['*']
+
+cfhighlight = cf.yellow
 
 def fetch_content(url):
     import feedparser
@@ -30,11 +33,11 @@ def fetch_content(url):
     print("\nEntries:")
 
     for entry in feed.entries:
-       print(" * Title:", entry.title)
-       print("   Link: ", entry.link)
+       print(cfhighlight | " * Title:", entry.title)
+       print(cfhighlight | "   Link: ", entry.link)
        #print("   Published: ", entry.published)
-       print("   Updated: ", entry.updated)
-       print("   Summary length: ", len(entry.summary) or None)
+       print(cfhighlight | "   Updated: ", entry.updated)
+       print(cfhighlight | "   Summary length: ", len(entry.summary) or None)
        #print("   Content items count:", len(entry.content))
 
 
