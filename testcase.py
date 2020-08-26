@@ -20,5 +20,8 @@ def entry_point():
 """Then initialize code."""
 entry_point()
 '''
-from printy import printy
-printy("Now this is blue [rI]Still red italic@ and also blue", predefined="b")
+import colorful as cf
+
+print(cf.italic_coral_on_beige('Hello World'))
+print(cf.italic & cf.coral_on_beige | 'Hello World')
+print('{c.italic_coral_on_beige}Hello World{c.reset}'.format(c=cf))
