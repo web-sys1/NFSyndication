@@ -5,7 +5,7 @@ python:
   - "3.8"
 # command to install dependencies
 before_install:
-  - pip install colored
+  - pip install printy
 install:
   - python setup.py install
   #- pip install -e ".[test]"
