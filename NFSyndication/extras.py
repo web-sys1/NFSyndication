@@ -38,7 +38,7 @@ def fetch_content(url):
        #print("   Content items count:", len(entry.content))
 
 
-ExtendedPost = colections.namedtuple('Post', [
+ExtendedPost = collections.namedtuple('Post', [
     'time',
     'blog',
     'title',
