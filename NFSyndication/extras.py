@@ -6,9 +6,42 @@ for main.py doesn't get polluted with nitpicks and tweaks.
 """
 
 import collections
+from datetime import datetime
+#from time import mktime
+from colored import  fg, bg, attr
+
+#def format_datetime(struct_time):
+    #return datetime.fromtimestamp(mktime(struct_time))
 
 # List of keywords to filter
 FILTER_WORDS = ['*']
+
+col = fg(29)
+res = attr('reset')
+
+def fetch_content(url):
+    import feedparser
+    feed = feedparser.parse(url)
+    print(" Feed title:", feed.feed.title or None)
+    print(" Link:", feed.feed.link or None)
+
+    if hasattr(feed.feed, 'subtitle'):
+        print("Subtitle:", feed.feed.subtitle)
+
+    #print("Updated:", feed.feed.updated)
+    #print("Updated (parsed):", format_datetime(feed.feed.updated_parsed))
+    #print("Feed ID:", rss_url.feed.id)
+    print('-----------------------------------------\n')
+    print("\nEntries:")
+
+    for entry in feed.entries:
+       print(col + " * Title:", entry.title)
+       print(col + "   Link: ", entry.link)
+       #print("   Published: ", entry.published)
+       print(col + "   Updated: ", entry.updated + res)
+       print(col+ "   Summary length: ", len(entry.summary) or None)
+       print(res)
+       #print("   Content items count:", len(entry.content))
 
 
 ExtendedPost = collections.namedtuple('Post', [
@@ -44,7 +77,7 @@ def normalise_post(post):
     if any(word.lower() in post.body.lower() for word in FILTER_WORDS):
         return None
     
-    if (blog == 'Marco.org'):
+    """if (blog == 'Marco.org'):
         if ('coffee' in post.body):
             return None
         if post.title.startswith(u'→'):
@@ -63,5 +96,6 @@ def normalise_post(post):
     elif (blog == 'Erica Sadun') and (post.author == 'erica'):
         return ExtendedPost(post.time, post.blog, post.title,
                             None, post.link, post.body, None)
+    """
 
     return ExtendedPost(*post, permalink=None)
