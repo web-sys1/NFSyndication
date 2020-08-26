@@ -8,16 +8,11 @@ for main.py doesn't get polluted with nitpicks and tweaks.
 import collections
 from datetime import datetime
 #from time import mktime
-from colored import  fg, bg, attr
-
 #def format_datetime(struct_time):
     #return datetime.fromtimestamp(mktime(struct_time))
 
 # List of keywords to filter
 FILTER_WORDS = ['*']
-
-col = fg(29)
-res = attr('reset')
 
 def fetch_content(url):
     import feedparser
@@ -35,16 +30,15 @@ def fetch_content(url):
     print("\nEntries:")
 
     for entry in feed.entries:
-       print(col + " * Title:", entry.title)
-       print(col + "   Link: ", entry.link)
+       print(" * Title:", entry.title)
+       print("   Link: ", entry.link)
        #print("   Published: ", entry.published)
-       print(col + "   Updated: ", entry.updated + res)
-       print(col+ "   Summary length: ", len(entry.summary) or None)
-       print(res)
+       print("   Updated: ", entry.updated)
+       print("   Summary length: ", len(entry.summary) or None)
        #print("   Content items count:", len(entry.content))
 
 
-ExtendedPost = collections.namedtuple('Post', [
+ExtendedPost = colections.namedtuple('Post', [
     'time',
     'blog',
     'title',
