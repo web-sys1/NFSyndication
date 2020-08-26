@@ -1,4 +1,3 @@
-'''
 import os
 import NFSyndication
 import subprocess
@@ -19,4 +18,4 @@ def entry_point():
 
 """Then initialize code."""
 entry_point()
-'''
+
