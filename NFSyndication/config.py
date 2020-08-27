@@ -1,12 +1,14 @@
 #!/usr/bin/python 
 import sys
+import colorful as cf
 
+cfail = cf.bold_red
 
 def init():
   try:
    from NFSyndication import nfs_main, styles
   except Exception as e:
-   print(f"Fatal: {e}")
+   print(cfail(f"Fatal: {e}"))
    sys.exit(1)
   
   #return os.popen(f'{dir_path}/nfs_main.py').read()
