@@ -34,10 +34,10 @@ def fetch_content(url):
 
     for entry in feed.entries:
        print(cfhighlight(f" * Title: {entry.title}"))
-       print(cfhighlight(f"   Link: {entry.link}")
+       print(cfhighlight(f"   Link: {entry.link}"))
        #print("   Published: ", entry.published)
-       print(cfhighlight(f"Updated: {entry.updated}")
-       print(cfhighlight(f"   Summary length: {len(entry.summary) or None}")
+       print(cfhighlight(f"Updated: {entry.updated}"))
+       print(cfhighlight(f"   Summary length: {len(entry.summary) or None}"))
        #print("   Content items count:", len(entry.content))
 
 
