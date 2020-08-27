@@ -1,5 +1,5 @@
 pandas
-colored==1.4.2
+colorful==0.5.4
 cssutils
 feedparser==5.2.1
 Jinja2==2.10.1
