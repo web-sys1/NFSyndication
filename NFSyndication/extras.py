@@ -15,7 +15,7 @@ import colorful as cf
 # List of keywords to filter
 FILTER_WORDS = ['*']
 
-cfhighlight = cf.yellow
+cfhighlight = cf.bold_blue
 
 def fetch_content(url):
     import feedparser
