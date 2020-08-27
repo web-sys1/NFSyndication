@@ -39,6 +39,6 @@ Bug fix
 After many hours of working to development, it was set up an way of path
 configuration due to errors. Meanwhile, we have to set code
 ``os.path.dirname(os.path.realpath(__file__))`` with the globalization
-of variables for source code in this package.
+of variables for source code in this package. If you encounter a problem, please report `here <https://github.com/web-sys1/NFSyndication/issues/new>`_.
 
 .. _LICENSE: https://github.com/web-sys1/NFSyndication/blob/master/LICENSE
