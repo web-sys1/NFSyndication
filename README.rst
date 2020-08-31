@@ -1,11 +1,14 @@
 =====================
 News Feed Syndication
 =====================
-
+   
 .. image:: https://travis-ci.org/web-sys1/NFSyndication.svg?branch=master
-     :target: https://travis-ci.org/web-sys1/NFSyndication
+   :target: https://travis-ci.org/web-sys1/NFSyndication
      
 This is a set of scripts for aggregating RSS feeds.
+
+.. image:: https://repl.it/badge/github/web-sys1/NFSyndication
+   :target: https://repl.it/github/web-sys1/NFSyndication
 
 Installation
 ------------
