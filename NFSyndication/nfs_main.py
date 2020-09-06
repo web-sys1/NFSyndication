@@ -11,7 +11,7 @@ import pytz
 import typing
 import sys
 
-from NFSyndication.extras import normalise_post, fetch_content
+from .extras import normalise_post, fetch_content
 
 config = configparser.ConfigParser()
 
