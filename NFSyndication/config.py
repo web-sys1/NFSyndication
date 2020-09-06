@@ -6,7 +6,7 @@ cfail = cf.bold_red
 
 def init():
   try:
-   from NFSyndication import nfs_main, styles
+   from . import nfs_main, styles
   except Exception as e:
    print(cfail(f"Fatal: {e}"))
    sys.exit(1)
