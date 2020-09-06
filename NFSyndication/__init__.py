@@ -3,7 +3,7 @@
 import os
 from . import config
 
-__version_info__ = (0,2,19)
+__version_info__ = (0,2,20)
 __version__ = '.'.join(map(str,__version_info__))
 
 __base_path__ = 'feeds.txt'
