@@ -1,7 +1,7 @@
 #!/usr/bin/python 
 # -*- coding: utf-8 -*-
 import os
-from NFSyndication import config
+from . import config
 
 __version_info__ = (0,2,19)
 __version__ = '.'.join(map(str,__version_info__))
