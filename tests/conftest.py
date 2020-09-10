@@ -3,7 +3,7 @@ import NFSyndication
 import subprocess
 from NFSyndication.config import init as NFS_init
 
-def conf():
+def test_conf():
     """ We use these conditions to check the statement"""
     subscriptions = [
      'http://feedpress.me/512pixels',
@@ -15,9 +15,6 @@ def conf():
      f.write(",".join(subscriptions).replace(',', '\n'))
     self.entry_point()
     
-def entry_point():
+def test_entrypoint():
     """Then initialize code."""
     return NFS_init()
-    
-def test_funcfast():
-    pass
