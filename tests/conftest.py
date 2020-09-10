@@ -13,7 +13,7 @@ def test_conf():
   
     with open(f'feeds.txt', 'w', encoding='utf8') as f:
      f.write(",".join(subscriptions).replace(',', '\n'))
-    self.entry_point()
+    NFS_init.entry_point()
     
 def test_entrypoint():
     """Then initialize code."""
