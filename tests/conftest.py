@@ -1,7 +1,7 @@
 import os, glob
 import NFSyndication
 import subprocess
-from NFSyndication.config import init as NFS_init
+from NFSyndication import main as NFS_init
 
 def test_conf():
     """ We use these conditions to check the statement"""
