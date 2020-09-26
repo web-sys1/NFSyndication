@@ -1,20 +1,14 @@
+name: CI
 
-name: test
-on: [push, pull_request]
+on: [push]
 
 jobs:
-  test-run:
-    runs-on: ubuntu-latest
-    container:
-      image: archlinux
-      options: --privileged
-      volumes:
-        - /sys/fs/cgroup:/sys/fs/cgroup
+  build:
+    runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v2
-      - name: Build Arch Linux package
-        uses: FFY00/build-arch-package@master
-        with:
-          PKGBUILD: $GITHUB_WORKSPACE/.github/workflows/PKGBUILD
-          OUTDIR: $HOME/arch-packages
-
+    - uses: actions/checkout@v1
+    - name: Install Archlinux
+      run: curl -L https://github.com/zaoqi/github-actions-archlinux/raw/master/install.sh | sh
+    - name: MAKE PKG
+      run: |
+        makepkg --printsrcinfo > .SRCINFO
