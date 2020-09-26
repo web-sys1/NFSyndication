@@ -7,8 +7,8 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v1
-    - name: Install Archlinux
-      run: curl -L https://github.com/zaoqi/github-actions-archlinux/raw/master/install.sh | sh
+    - name: Archlinux CMake builder
+      uses: codehz/arch-cmake-builder@v0.1.3
     - name: MAKE PKG
       run: |
-        makepkg --printsrcinfo > .SRCINFO
+        makepkg --printsrcinfo > .SRCINFO 
