@@ -15,6 +15,6 @@ jobs:
       - name: Build Arch Linux package
         uses: FFY00/build-arch-package@master
         with:
-          PKGBUILD: $GITHUB_WORKSPACE/PKGBUILD
+          PKGBUILD: $GITHUB_WORKSPACE/.github/workflows/PKGBUILD
           OUTDIR: $HOME/arch-packages
 
