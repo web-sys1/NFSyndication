@@ -2,7 +2,7 @@ import os, glob
 import NFSyndication
 import subprocess
 from NFSyndication import main as NFS_init
-
+# test@
 def test_conf():
     """ We use these conditions to check the statement"""
     subscriptions = [
