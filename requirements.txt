@@ -2,7 +2,7 @@ pandas
 colorful==0.5.4
 cssutils
 feedparser==5.2.1
-Jinja2==2.10.1
+Jinja2==2.11.3
 MarkupSafe==0.23
 configparser==5.0.0
 pytz>=2017.2
