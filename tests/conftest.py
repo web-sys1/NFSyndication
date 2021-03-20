@@ -17,4 +17,4 @@ def test_conf():
     
 def test_entrypoint():
     """Then initialize code."""
-    return NFS_init()
+    return test_conf()
