@@ -10,11 +10,11 @@ def run():
   parser.add_argument(
         "--version",
         action="store_true",
-        help="print the version"
+        help="print the version", default=1
     )
   args = parser.parse_known_args()
-  if args.version:
-      print('NFSyndication version ' + __version__)
+  if args[0].version:
+      print('NFSyndication version: ' + __version__)
       sys.exit()
   try:
    logger = logging.getLogger()
