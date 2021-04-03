@@ -1,7 +1,7 @@
 import os, glob
-import NFSyndication
+import pytest
 import subprocess
-from NFSyndication import main as NFS_init
+from NFSyndication import __main__ as NFS_init
 # test@
 def test_conf():
     """ We use these conditions to check the statement"""
@@ -13,7 +13,7 @@ def test_conf():
   
     with open(f'feeds.txt', 'w', encoding='utf8') as f:
      f.write(",".join(subscriptions).replace(',', '\n'))
-    return NFS_init()
+    return NFS_init.run()
     
 def test_entrypoint():
     """Then initialize code."""
