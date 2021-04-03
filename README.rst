@@ -19,6 +19,9 @@ You can install package through the line command:
 
    pip install NFSyndication
 
+*Alternatively you can install it form source code (with git prefix):* ``pip install git+https://github.com/web-sys1/NFSyndication.git``
+
+
 Usage
 -----
 Put a list of feed URLs in ``feeds.txt`` file. One feed per line. 
@@ -29,7 +32,7 @@ Run the command:
 
    nfsyndication-src
 
-Assuming nothing goes wrong, the posts will be written to ``HTML`` file.
+.. note:: Assuming nothing goes wrong, the posts will be written to ``HTML`` file.
 
 License
 -------
