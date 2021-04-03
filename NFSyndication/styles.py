@@ -1,7 +1,8 @@
-
 # -*- coding: utf-8 -*-
 import cssutils
-# You can decode the cssText in ASCII using the function sheet.cssText.decode('ascii') before writing to CSS file
+# You can decode the cssText in ASCII using the function sheet.cssText.decode('ascii') before writing to CSS file.
+import logging
+cssutils.log.setLevel(logging.CRITICAL) # Get rid of the warnings.
 
 css = '''
        /* begin */
