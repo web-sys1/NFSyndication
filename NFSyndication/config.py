@@ -13,4 +13,4 @@ def init():
    print(cfail(f"Error while parsing: {e}"))
    sys.exit(1)
   except KeyboardInterrupt:
-    print('Session terminated. Operation aborded by the user.')
+    print('Session terminated. Operation aborted by the user.')
