@@ -12,7 +12,7 @@ def run():
         action="store_true",
         help="print the version"
     )
-  args = parser.parse_args()
+  args = parser.parse_known_args()
   if args.version:
       print('NFSyndication version ' + __version__)
       sys.exit()
