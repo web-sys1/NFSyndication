@@ -52,7 +52,7 @@ def process_entry(entry, blog):
     Returns None if the entry should be excluded.
     """
     # Get the date of the post.  If it was published more than two days
-    # ago, drop the entry.
+    # ago, drop the entry. Now, the feed entries is being analyzed and processed before reading in SUBSCRIPTIONS.
     try:
         when = entry['updated_parsed']
     except KeyError:
@@ -61,8 +61,9 @@ def process_entry(entry, blog):
 
     if when < START:
         return
-
+        
     title = entry['title']
+    
     try:
         author = entry['author']
     except KeyError:
@@ -71,8 +72,13 @@ def process_entry(entry, blog):
     try:
         body = entry['content'][0]['value']
     except KeyError:
-        body = entry['summary']
-
+        body = ''
+    # Skip this step, try with "body = entry['summary']"
+    try:
+        body = entry['summary'];
+    except KeyError:
+        raise Exception("No summary given.")
+        
     return normalise_post(Post(when, blog, title, author, link, body))    
 
 posts = []
@@ -81,7 +87,7 @@ for url in SUBSCRIPTIONS:
     try:
         blog = feed['feed']['title']
     except KeyError:
-        raise Exception(f"[{feed.bozo_exception or 'unexpected error.'}] \n{(f'Could not fetch URL(s): {url}')}")
+        raise Exception(f"[{feed.bozo_exception}] \n{(f'Could not fetch URL(s): {url}')}")
         sys.exit(-1)
         continue
     for entry in feed['entries']:
@@ -97,6 +103,7 @@ for url in SUBSCRIPTIONS:
 dir_path = os.path.dirname(os.path.realpath(__file__))
 with open(f'{dir_path}/templates/template.html', encoding='utf8') as f:
     template = jinja2.Template(f.read())
-
+    
+# When done, it converts to HTML.
 with open(f'output/index.html', 'w', encoding='utf8') as f:
     f.write(template.render(posts=posts, time=datetime.now()))
