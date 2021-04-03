@@ -36,7 +36,6 @@ Otherwise, you should do that through **Python** code:
 
 .. code:: python
 
-  import NFSyndication
   from NFSyndication import __main__ as NFS_init
 
   def entry_point():
