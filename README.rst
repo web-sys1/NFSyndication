@@ -37,7 +37,7 @@ Otherwise, you should do that through **Python** code:
 .. code:: python
 
   import NFSyndication
-  from NFSyndication import main as NFS_init
+  from NFSyndication import __main__ as NFS_init
 
   def entry_point():
     """ We use these conditions to check the statement"""
