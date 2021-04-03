@@ -4,7 +4,7 @@
 
 from os.path import dirname, abspath, join, exists
 from setuptools import setup, find_packages
-from NFSyndication import __version__
+from NFSyndication import __version__ as pkgversion
 
 with open("README.rst", "r") as fh:
     long_description = fh.read()
@@ -13,11 +13,11 @@ install_reqs = [req for req in open(abspath(join(dirname(__file__), 'requirement
 
 setup(
     name = "NFSyndication",
-    version = __version__,
+    version = pkgversion,
     packages=find_packages(exclude=['test', 'test.*', 'testcase.py']),
     entry_points = {
         'console_scripts': [ 
-            'nfsyndication-src = NFSyndication:main',
+            'nfsyndication-src = NFSyndication.__main__:run',
          ]
         },
     package_data = {'NFSyndication': ['templates/*.html']},
