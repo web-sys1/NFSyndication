@@ -31,6 +31,30 @@ Run the command:
 .. code:: bash
 
    nfsyndication-src
+   
+Otherwise, you should do that through **Python** code:
+
+.. code:: python
+
+  import NFSyndication
+  from NFSyndication import main as NFS_init
+
+  def entry_point():
+    """ We use these conditions to check the statement"""
+    subscriptions = [
+     'http://feedpress.me/512pixels',
+     'http://www.leancrew.com/all-this/feed/',
+     'http://ihnatko.com/feed/',
+     'http://blog.ashleynh.me/feed',
+     'http://www.betalogue.com/feed/',
+     ]
+  
+    with open(f'feeds.txt', 'w', encoding='utf8') as f:
+     f.write(",".join(subscriptions).replace(',', '\n'))
+    return NFS_init()
+
+  """Then initialize code."""
+  entry_point()
 
 .. note:: Assuming nothing goes wrong, the posts will be written to ``HTML`` file.
 
