@@ -93,6 +93,8 @@ for url in SUBSCRIPTIONS:
       fetch_content(url)
     except:
       raise SystemExit
+    finally:
+      print("\nOperation done.")
    
 # Get the template, and drop in the posts
 dir_path = os.path.dirname(os.path.realpath(__file__))
