@@ -72,12 +72,7 @@ def process_entry(entry, blog):
     try:
         body = entry['content'][0]['value']
     except KeyError:
-        body = ''
-    # Skip this step, try with "body = entry['summary']"
-    try:
-        body = entry['summary'];
-    except KeyError:
-        raise Exception("No summary given.")
+        body = entry['summary']
         
     return normalise_post(Post(when, blog, title, author, link, body))    
 
