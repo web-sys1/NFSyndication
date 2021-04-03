@@ -47,6 +47,7 @@ Otherwise, you should do that through **Python** code:
      'http://ihnatko.com/feed/',
      'http://blog.ashleynh.me/feed',
      'http://www.betalogue.com/feed/',
+      ...
      ]
   
     with open(f'feeds.txt', 'w', encoding='utf8') as f:
