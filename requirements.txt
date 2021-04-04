@@ -1,4 +1,3 @@
-pandas
 colorful==0.5.4
 cssutils
 feedparser==6.0.2
