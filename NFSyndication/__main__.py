@@ -10,7 +10,7 @@ def run():
   parser.add_argument(
         "--version",
         action="store_true",
-        help="print the version", default=1
+        help="print the version"
     )
   args = parser.parse_known_args()
   if args[0].version:
