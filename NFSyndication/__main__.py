@@ -13,23 +13,6 @@ from functools import wraps
 logger = logging.getLogger(__name__)
 
 handler = logging.StreamHandler()
-log_format = "%(asctime)s %(levelname)s -- %(message)s"
-formatter = logging.Formatter(log_format)
-handler.setFormatter(formatter)
-# logger.addHandler(handler)
-
-# always write everything to the rotating log files
-if not os.path.exists('logs'): os.mkdir('logs')
-log_file_handler = logging.handlers.TimedRotatingFileHandler('logs/args.log', when='M', interval=2)
-log_file_handler.setFormatter( logging.Formatter('%(asctime)s [%(levelname)s](%(name)s:%(funcName)s:%(lineno)d): %(message)s') )
-log_file_handler.setLevel(logging.DEBUG)
-logger.addHandler(log_file_handler)
-
-# also log to the console at a level determined by the --verbose flag
-console_handler = logging.StreamHandler() # sys.stderr
-console_handler.setLevel(logging.CRITICAL) # set later by set_log_level_from_verbose() in interactive sessions
-console_handler.setFormatter( logging.Formatter('[%(levelname)s](%(name)s): %(message)s') )
-logger.addHandler(console_handler)
 
 verbose = False
 
@@ -75,3 +58,4 @@ elif args.verbose == 2:
 
 if __name__ == '__main__':
     run()
+
