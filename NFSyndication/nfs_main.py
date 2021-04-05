@@ -93,8 +93,8 @@ posts = []
 
 try:
  for url in SUBSCRIPTIONS:
-    feed = feedparser.parse(url)
     try:
+        feed = feedparser.parse(url)
         blog = feed['feed']['title']
     except KeyError:
         raise Exception(f"[{feed.bozo_exception}] \n{(f'Could not fetch URL(s): {url}')}")
