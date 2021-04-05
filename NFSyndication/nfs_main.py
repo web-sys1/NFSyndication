@@ -10,15 +10,26 @@ import jinja2
 import pytz
 import typing
 import sys
+import argparse
+from . import parser
 
 from .extras import normalise_post, fetch_content
 
 config = configparser.ConfigParser()
+args = parser.parse_args()
+
+argsFilename = args.filename
 
 # Get a list of feed URLs
-with open('feeds.txt') as f:
+try:
+ with open('feeds.txt') as f:
     SUBSCRIPTIONS = list(f)
-
+    print('Loading feeds.txt')
+except: # If you don't have 'feeds.txt' in specified path, you can specify one (nfsyndication-src --filename=sample.txt)
+  for documentList in argsFilename:
+   with open(documentList) as f:
+    SUBSCRIPTIONS = list(f)
+   print('Loading file: ' + documentList)
 
 # Date and time setup. I want only posts from "today" and "yesterday",
 # where the day lasts until 2 AM.
@@ -73,7 +84,7 @@ def process_entry(entry, blog):
         body = entry['content'][0]['value']
     except KeyError:
         body = entry['summary']
-        
+    
     return normalise_post(Post(when, blog, title, author, link, body))    
 
 posts = []
@@ -99,8 +110,10 @@ for url in SUBSCRIPTIONS:
 # Get the template, and drop in the posts
 dir_path = os.path.dirname(os.path.realpath(__file__))
 with open(f'{dir_path}/templates/template.html', encoding='utf8') as f:
+    print("\nChecking template...")
     template = jinja2.Template(f.read())
     
 # When done, it converts to HTML.
 with open(f'output/index.html', 'w', encoding='utf8') as f:
     f.write(template.render(posts=posts, time=datetime.now()))
+    print('Successful.')

@@ -20,7 +20,7 @@ cfhighlight = cf.bold_blue
 def fetch_content(url):
     import feedparser
     feed = feedparser.parse(url)
-    print(" Feed title:", feed.feed.title or None)
+    print("\n Feed title:", feed.feed.title or None)
     print(" Link:", feed.feed.link or None)
 
     if hasattr(feed.feed, 'subtitle'):
@@ -29,7 +29,7 @@ def fetch_content(url):
     #print("Updated:", feed.feed.updated)
     #print("Updated (parsed):", format_datetime(feed.feed.updated_parsed))
     #print("Feed ID:", rss_url.feed.id)
-    print('-----------------------------------------\n')
+    print('-----------------------------------------')
     print("\nEntries:")
 
     for entry in feed.entries:
