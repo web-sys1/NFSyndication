@@ -25,11 +25,14 @@ try:
  with open('feeds.txt') as f:
     SUBSCRIPTIONS = list(f)
     print('Loading feeds.txt')
-except: # If you don't have 'feeds.txt' in specified path, you can specify one (nfsyndication-src --filename=sample.txt)
+except FileNotFoundError:   # If you don't have 'feeds.txt' in specified path, you can specify one (nfsyndication-src --filename=sample.txt)
+ try:
   for documentList in argsFilename:
    with open(documentList) as f:
     SUBSCRIPTIONS = list(f)
    print('Loading file: ' + documentList)
+ except TypeError:
+   raise Exception('NFSyndication [ERROR]: feeds.txt not found. See `nfsyndication-src --help` for more.')
 
 # Date and time setup. I want only posts from "today" and "yesterday",
 # where the day lasts until 2 AM.
@@ -55,7 +58,6 @@ try:
 
 except Exception as exc:
    print(f'Exception Error: {exc}')
-
 
 def process_entry(entry, blog):
     """
@@ -88,7 +90,9 @@ def process_entry(entry, blog):
     return normalise_post(Post(when, blog, title, author, link, body))    
 
 posts = []
-for url in SUBSCRIPTIONS:
+
+try:
+ for url in SUBSCRIPTIONS:
     feed = feedparser.parse(url)
     try:
         blog = feed['feed']['title']
@@ -106,7 +110,10 @@ for url in SUBSCRIPTIONS:
       raise SystemExit
     finally:
       print("\nOperation done.")
-   
+except NameError:
+  pass
+
+
 # Get the template, and drop in the posts
 dir_path = os.path.dirname(os.path.realpath(__file__))
 with open(f'{dir_path}/templates/template.html', encoding='utf8') as f:
