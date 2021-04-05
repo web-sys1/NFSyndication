@@ -56,18 +56,6 @@ if args.version:
 
 @exec_wrapper
 def run():
-
-  parser = argparse.ArgumentParser()
-  parser.add_argument(
-        "--version",
-        action="store_true",
-        help="print the version"
-    )
-  args = parser.parse_args()
-  if args.version:
-      print('NFSyndication version: ' + __version__)
-      sys.exit(0)
-
   try:
    logger.setLevel(logging.DEBUG)
    if os.path.isfile(__base_path__) and os.access(__base_path__, os.R_OK):
@@ -77,17 +65,13 @@ def run():
    pass
   return config.init()
 
+logger = logging.StreamHandler()
 
-    if not args.verbose:
-        console_handler.setLevel('ERROR')
-    elif args.verbose == 1:
-        console_handler.setLevel('WARNING')
-    elif args.verbose == 2:
-        console_handler.setLevel('INFO')
-    elif args.verbose >= 3:
-        console_handler.setLevel('DEBUG')
-    else:
-        logger.critical("UNEXPLAINED NEGATIVE COUNT!")
-   
+if args.verbose == 1:
+        logging.getLogger().setLevel(logging.INFO)
+elif args.verbose == 2:
+        logging.getLogger().setLevel(logging.DEBUG)
+
+
 if __name__ == '__main__':
     run()
