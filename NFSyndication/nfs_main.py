@@ -113,7 +113,6 @@ try:
 except NameError:
   pass
 
-
 # Get the template, and drop in the posts
 dir_path = os.path.dirname(os.path.realpath(__file__))
 with open(f'{dir_path}/templates/template.html', encoding='utf8') as f:
