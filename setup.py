@@ -20,7 +20,7 @@ setup(
             'nfsyndication-src = NFSyndication.__main__:run',
          ]
         },
-    package_data = {'NFSyndication': ['templates/*.html']},
+    package_data = {'NFSyndication': ['templates/**/*.*']},
     description= "News Feed Syndication - A package that read and fetch RSS feeds from the publications.",
     long_description=long_description,
     long_description_content_type="text/x-rst",
