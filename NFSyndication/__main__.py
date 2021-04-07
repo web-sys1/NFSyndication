@@ -10,8 +10,6 @@ from . import parser
 
 from functools import wraps
 
-logger = logging.getLogger(__name__)
-
 handler = logging.StreamHandler()
 
 verbose = False
@@ -27,7 +25,7 @@ def exec_wrapper(func):
         start = time.time()
         result = func(*args, **kwargs)
         end = time.time()
-        print("Execution took {}s".format(round(end - start, 2)))
+        print("Command execution took {}s".format(round(end - start, 2)))
         return result
 
     return wrapper
@@ -40,7 +38,7 @@ if args.version:
 @exec_wrapper
 def run():
   try:
-   logger.setLevel(logging.DEBUG)
+   #logger.setLevel(logging.DEBUG)
    if os.path.isfile(__base_path__) and os.access(__base_path__, os.R_OK):
     os.mkdir('output')
   except FileExistsError:
@@ -48,14 +46,30 @@ def run():
    pass
   return config.init()
 
-logger = logging.StreamHandler()
+#logging.StreamHandler()
+#logger = logging.getLogger()
+
+logger = logging.getLogger()
+formatter = logging.Formatter('%(asctime)s | %(levelname)s | %(message)s')
+
+stdout_handler = logging.StreamHandler(sys.stdout)
+stdout_handler.setLevel(logging.DEBUG)
+stdout_handler.setFormatter(formatter)
 
 if args.verbose == 1:
-        logging.getLogger().setLevel(logging.INFO)
+        logger.setLevel(logging.INFO)
+        file_handler = logging.FileHandler('logs.log')
+        file_handler.setLevel(logging.DEBUG)
+        file_handler.setFormatter(formatter)
+        logger.addHandler(file_handler)
+        logger.addHandler(stdout_handler)
 elif args.verbose == 2:
-        logging.getLogger().setLevel(logging.DEBUG)
-
+        logger.setLevel(logging.DEBUG)
+elif args.verbose == 3:
+        logger.setLevel(logging.CRITICAL)
+        
 
 if __name__ == '__main__':
     run()
+
 

@@ -13,7 +13,7 @@ parser = argparse.ArgumentParser(description='News Feed Syndication {} - A packa
 parser.add_argument("-V",
         "--version",
         action="store_true",
-        help="print the version"
+        help="Print the package version and quit"
         )
 parser.add_argument('-v', '--verbose', help='Show verbose messages', action='count', default=0)
                         

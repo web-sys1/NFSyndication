@@ -4,18 +4,25 @@ import os
 import collections
 from datetime import datetime, timedelta
 import time
-import configparser
+from configparser import ConfigParser
+
 import feedparser
 import jinja2
+import json
+import logging
 import pytz
 import typing
 import sys
-import argparse
+import logging
 from . import parser
 
+from jinja2.exceptions import UndefinedError
+from . import parser
 from .extras import normalise_post, fetch_content
 
-config = configparser.ConfigParser()
+logging.basicConfig(format='%(message)s', datefmt='%I:%M', level=logging.DEBUG)
+
+config = ConfigParser()
 args = parser.parse_args()
 
 argsFilename = args.filename
@@ -86,7 +93,6 @@ def process_entry(entry, blog):
         body = entry['content'][0]['value']
     except KeyError:
         body = entry['summary']
-    
     return normalise_post(Post(when, blog, title, author, link, body))    
 
 posts = []
@@ -97,7 +103,14 @@ try:
         feed = feedparser.parse(url)
         blog = feed['feed']['title']
     except KeyError:
-        raise Exception(f"[{feed.bozo_exception}] \n{(f'Could not fetch URL(s): {url}')}")
+        if args.verbose and feed.bozo:
+            logging.error("Feed data summary on URL {}".format(url))
+            logging.error("Exception [{bozo_exception}]: {bozo_message}".format(bozo_exception=str(feed.bozo_exception.__class__.__name__), bozo_message=str(feed.bozo_exception)))
+            if (hasattr(feed.bozo_exception, 'getLineNumber') and hasattr(feed.bozo_exception, 'getMessage')):
+                line = feed.bozo_exception.getLineNumber()
+                logging.error('Line %d: %s', line, feed.bozo_exception.getMessage())
+                
+        raise Exception(f"[{feed.bozo_exception}] (code {feed.status}) \n{(f'Could not fetch URL(s): {url}')}")
         sys.exit(-1)
         continue
     for entry in feed['entries']:
@@ -105,11 +118,9 @@ try:
         if post:
             posts.append(post)
     try:
-      fetch_content(url)
+     fetch_content(url)
     except:
-      raise SystemExit
-    finally:
-      print("\nOperation done.")
+     raise SystemExit
 except NameError:
   pass
 
