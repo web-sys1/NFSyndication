@@ -3,6 +3,8 @@ import feedparser
 from .extras import fetch_content
 import colorful as cf
 from jinja2 import Template, Environment, FileSystemLoader
+from jinja2.exceptions import *
+from .
 
 class GetFeedStaticData(object):
     def __init__(self, eachUrl):
@@ -17,9 +19,12 @@ class GetFeedStaticData(object):
     def fetch_feeds(self, URLs):
         """ Request and parse all of the feeds, saving them in self.feeds """
         for url in URLs:
+          try:
             print(f"Fetching {url}")
             self.feeds.append(feedparser.parse(url))
             fetch_content(url)
+          except Exception as er:
+            print("")
 
     def empty_public(self):
         """ Ensure the public directory is empty before generating. """
@@ -38,10 +43,14 @@ class GetFeedStaticData(object):
 
     def render_page(self):
         print("Rendering page to static file.")
-        template = self.env.get_template('_layout.html')
+        try:
+          template = self.env.get_template('_layout.html')
+        except (TemplateSyntaxError, TemplateNotFound, UndefinedError, TemplateAssertionError) as error:
+          print(cfail("Error while reading template: {}".format(str(error))))
         with open('output/index.html', 'w+', encoding='utf8') as file:
             html = template.render(
                 title = "Spiffy Feeds",
                 feeds = self.feeds
             )
             file.write(html)
+       
