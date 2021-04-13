@@ -3,8 +3,6 @@ import feedparser
 from .extras import fetch_content
 import colorful as cf
 from jinja2 import Template, Environment, FileSystemLoader
-from jinja2.exceptions import *
-from .
 
 class GetFeedStaticData(object):
     def __init__(self, eachUrl):
