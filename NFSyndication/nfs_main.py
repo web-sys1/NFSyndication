@@ -12,7 +12,6 @@ import logging
 import pytz
 import sys
 import logging
-from . import parser
 
 from jinja2.exceptions import UndefinedError
 from . import parser
