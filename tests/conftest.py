@@ -1,6 +1,7 @@
 import os, glob
 import pytest
 import subprocess
+import pytest
 from NFSyndication import __main__ as NFS_init
 # test@
 def test_conf():
