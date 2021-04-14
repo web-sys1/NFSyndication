@@ -41,9 +41,7 @@ class GetFeedStaticData(object):
 
     def render_page(self):
         print("Rendering page to static file.")
-        try:
           template = self.env.get_template('_layout.html')
-        except (TemplateSyntaxError, TemplateNotFound, UndefinedError, TemplateAssertionError) as error:
           print(cfail("Error while reading template: {}".format(str(error))))
         with open('output/index.html', 'w+', encoding='utf8') as file:
             html = template.render(

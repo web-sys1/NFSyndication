@@ -5,19 +5,45 @@ a separate file from the main feed parsing logic so the commit history
 for main.py doesn't get polluted with nitpicks and tweaks.
 """
 import collections
-from datetime import datetime
+from datetime import datetime, timedelta
 #from time import mktime
 #def format_datetime(struct_time):
     #return datetime.fromtimestamp(mktime(struct_time))
 import colorful as cf
 import logging
 import json
-from colorama import init, Fore, Back, Style
-#from . import parser
+import pytz
+import sys
+import time
+from typing import NamedTuple
+from configparser import ConfigParser
 
-#args = parser.parse_args()
+from colorama import init, Fore, Back, Style
+from . import parser
+
+argcomp = parser.parse_args()
 
 init(convert=True)
+
+config = ConfigParser()
+
+# Date and time setup. I want only posts from "today" and "yesterday",
+# where the day lasts until 2 AM.
+TIMEZONE = config.get(section='default', option='timezone', fallback='GMT')
+
+# Get the current time in the home timezone, then step back to include
+# the last two days.
+home_tz = pytz.timezone(TIMEZONE)
+dt = datetime.now(home_tz)
+if dt.hour < 2:
+    dt -= timedelta(hours=72)
+else:
+    dt -= timedelta(hours=48)
+start = dt.replace(hour=0, minute=0, second=0, microsecond=0)
+
+# Convert this time back into UTC.
+utc = pytz.utc
+START = start.astimezone(utc) 
 
 # List of keywords to filter
 FILTER_WORDS = ['*']
@@ -27,8 +53,10 @@ cfhighlight = cf.bold_blue
 
 def fetch_content(url):
    import feedparser
+   feedJSON = []
    try:
     feed = feedparser.parse(url)
+    feedJSON.append(feed)
     print("\nFeed title:", feed.feed.title or None)
     print("Link:", feed.feed.link or None)
 
@@ -48,12 +76,16 @@ def fetch_content(url):
        print(cfhighlight(f"   Updated: {entry.updated}"))
        print(cfhighlight(f"   Summary length: {len(entry.summary) or None} \n"))
        #print("   Content items count:", len(entry.content))
+          
    except Exception as e:
     print(Fore.RED + 'Error occured while parsing some URLs: {feedurl} '.format(feedurl=url) + 'HTTP {return_code}'.format(return_code=feed.status))
     print('{}: {}'.format(str(e.__class__.__name__),str(e)))
     print(Style.RESET_ALL)
+   except KeyboardInterrupt:
+    print('Operation aborted.')
+    sys.exit()
    else:
-    print(cf.bold_green("   Respone: {}".format(feed.status)))
+    print(cf.bold_green("   Respone: {}\n".format(feed.status)))
    finally:
     try:
      feedHeaders = json.dumps(feed.headers, indent=4, sort_keys=True)
@@ -61,25 +93,59 @@ def fetch_content(url):
     except Exception as e:
       print(e.__class__.__name__)
 
-ExtendedPost = collections.namedtuple('Post', [
-    'time',
-    'blog',
-    'title',
-    'author',
-    'link',
-    'body',
-    'permalink'
-])
 
+#ExtendedPost = collections.namedtuple('Post', [ 'time', 'blog', 'title', 'author', 'link', 'body', 'permalink'])
+#ExtendedPost = NamedTuple('Post', [('time', str), ('blog', str), ('title',str), ('author',str), ('link', str), ('body',str), ('permalink', str)])
 
-def remove_final_link(html_text):
-    return html_text.rsplit('<a', maxsplit=1)[0]
+class ExtendedPost(NamedTuple):
+  time: str
+  blog: str
+  title: str
+  author: str
+  link: str
+  body: str
+  permalink:str
 
+#Post = NamedTuple('Post', [('time', str), ('blog', str), ('title',str), ('author',str), ('link', str), ('body',str)])
 
-def extract_last_link(html_text):
-    return html_text.rsplit('"', maxsplit=2)[-2]
+class Post(NamedTuple):
+  time: str
+  blog: str
+  title: str
+  author: str
+  link: str
+  body: str
 
+def process_entry(entry, blog):
+    """
+    Coerces an entry from feedparser into a Post tuple.
+    Returns None if the entry should be excluded.
+    """
+    # Get the date of the post.  If it was published more than two days
+    # ago, drop the entry. Now, the feed entries is being analyzed and processed before reading in SUBSCRIPTIONS.
+    try:
+        when = entry['updated_parsed']
+    except KeyError:
+        when = entry['published_parsed']
+    when = utc.localize(datetime.fromtimestamp(time.mktime(when)))
+    
+    if argcomp.comparator_filter:
+      if when < START:
+        return  
 
+    title = entry['title']
+    
+    try:
+        author = entry['author']
+    except KeyError:
+        author = ', '.join(a['name'] for a in entry.get('authors', []))
+    link = entry['link']
+    try:
+        body = entry['content'][0]['value']
+    except KeyError:
+        body = entry['summary']
+    return normalise_post(Post(when, blog, title, author, link, body))
+    
 def normalise_post(post):
     """
     This function takes a post and a blog, and applies some
@@ -121,3 +187,11 @@ def normalise_post(post):
     """
 
     return ExtendedPost(*post, permalink=None)
+   
+
+def remove_final_link(html_text):
+    return html_text.rsplit('<a', maxsplit=1)[0]
+
+
+def extract_last_link(html_text):
+    return html_text.rsplit('"', maxsplit=2)[-2]

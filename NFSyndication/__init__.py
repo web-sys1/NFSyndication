@@ -3,6 +3,7 @@
 import argparse
 import sys
 import logging
+from distutils.util import strtobool
 
 __version_info__ = (0,2,23)
 __version__ = '.'.join(map(str,__version_info__))
@@ -18,3 +19,6 @@ parser.add_argument("-V",
 parser.add_argument('-v', '--verbose', help='Show verbose messages', action='count', default=0)
                         
 parser.add_argument('-f','--filename',help="specify which file type to use (for example: nfsyndication-src --filename=./path/to/sample.file.txt)", nargs='+')
+parser.add_argument('--outputJSON', help='Save feeds to output file JSON format.')
+parser.add_argument("--comparator-filter", type=lambda x:bool(strtobool(x)),
+       nargs='?', help='Enable the comparator. This will randomly ignore RSS feeds from the rendering output HTML.', const=True, default=False)

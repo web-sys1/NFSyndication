@@ -222,7 +222,7 @@ blockquote p {
 
 body {
   background-color: #140623;
-  max-width: 750px;
+  max-width: 995px;
   margin-top: 0;
   margin-left: auto;
   margin-right: auto;
@@ -244,6 +244,7 @@ h1 {
 .rss li {
   margin-left: -.5em;
   line-height: 1.4;
+  overflow: auto
 }
 
 .rss li pre {

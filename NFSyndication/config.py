@@ -4,7 +4,7 @@ import logging
 import colorful as cf
 from jinja2 import Template, Environment, FileSystemLoader
 from jinja2.exceptions import *
-from feedparser import parse as parseURL
+import feedparser
 import json
 import os
 import shutil
@@ -55,7 +55,7 @@ class GetFeedDataPerConfiguration(object):
         for url in URLs:
           try:
             print(f"Fetching {url}")
-            self.feedURL=parseURL(url)
+            self.feedURL=feedparser.parse(url)
             self.feeds.append(self.feedURL)
             fetch_content(url)
           except Exception as er:
@@ -97,6 +97,7 @@ class GetFeedDataPerConfiguration(object):
     def outputJson(self, trh, jsonInput):
          try:
            with open(os.path.join(self.outputP,'{}.json'.format(trh)), 'w', encoding='utf8') as jsonF:
+             self.jsonFile = jsonF
              json.dump(jsonInput, jsonF, ensure_ascii=False, indent=4)
          except TypeError:
              print('Error: {} at {hrefURL}'.format(self.feedURL.bozo_exception,hrefURL=self.feedURL.href)) 
