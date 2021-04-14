@@ -19,7 +19,7 @@
       <h3 class="{% if post.permalink %}link{% else %}full{% endif %}post_title"><a href="{{ post.link }}">{{ post.title }}</a>{% if post.permalink %} <span class="linkpost_arrow">→</span>{% endif %}</h3>
     </div>
     <div class="article_meta"><p>
-      Posted on {{ post.time.strftime('%d %B %Y').strip('') }} at {{ post.time.strftime('%I:%M&thinsp;%p').strip('').lower() }}
+      On {{ post.time.strftime('%d %B %Y').strip('') }} at {{ post.time.strftime('%I:%M&thinsp;%p').strip('').lower() }}
       • {{ post.blog }}
       {% if post.author and post.blog != post.author %}
         • by {{ post.author }}

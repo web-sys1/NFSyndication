@@ -2,7 +2,8 @@
 """
 This file contains the logic for filtering/munging posts.  It's kept in
 a separate file from the main feed parsing logic so the commit history
-for main.py doesn't get polluted with nitpicks and tweaks.
+for nfs_main.py doesn't get polluted with nitpicks and tweaks.
+
 """
 import collections
 from datetime import datetime, timedelta
@@ -94,7 +95,15 @@ def fetch_content(url):
       print(e.__class__.__name__)
 
 
-#ExtendedPost = collections.namedtuple('Post', [ 'time', 'blog', 'title', 'author', 'link', 'body', 'permalink'])
+
+class Post(NamedTuple):
+  time: str
+  blog: str
+  title: str
+  author: str
+  link: str
+  body: str
+
 #ExtendedPost = NamedTuple('Post', [('time', str), ('blog', str), ('title',str), ('author',str), ('link', str), ('body',str), ('permalink', str)])
 
 class ExtendedPost(NamedTuple):
@@ -106,15 +115,6 @@ class ExtendedPost(NamedTuple):
   body: str
   permalink:str
 
-#Post = NamedTuple('Post', [('time', str), ('blog', str), ('title',str), ('author',str), ('link', str), ('body',str)])
-
-class Post(NamedTuple):
-  time: str
-  blog: str
-  title: str
-  author: str
-  link: str
-  body: str
 
 def process_entry(entry, blog):
     """
@@ -144,7 +144,9 @@ def process_entry(entry, blog):
         body = entry['content'][0]['value']
     except KeyError:
         body = entry['summary']
-    return normalise_post(Post(when, blog, title, author, link, body))
+            
+    postField = Post(when, blog, title, author, link, body)
+    return normalise_post(postField)
     
 def normalise_post(post):
     """

@@ -8,7 +8,6 @@ from feedparser import parse as parseURL
 import json
 import os
 import shutil
-from .extras import fetch_content
 
 cfail = cf.bold_red
 
@@ -24,7 +23,7 @@ def init():
     sys.exit(1)
   except KeyboardInterrupt:
     print('Session terminated. Operation aborted by the user.')
-
+    
 class GetFeedDataPerConfiguration(object):
     def __init__(self, eachUrl, tempPath, emdF, fPath, outputPath, templFileLocation, outPath, pageTitle, outJSON=False, jsonFile=None):
         """ Request and parse all of the feeds, saving them in self.feeds"""
@@ -52,10 +51,11 @@ class GetFeedDataPerConfiguration(object):
         
     def fetch_feeds(self, URLs):
         """ Request and parse all of the feeds, saving them in self.feeds """
+        from .extras import fetch_content
         for url in URLs:
           try:
             print(f"Fetching {url}")
-            self.feedURL=parseURL(url)
+            self.feedURL = parseURL(url)
             self.feeds.append(self.feedURL)
             fetch_content(url)
           except Exception as er:

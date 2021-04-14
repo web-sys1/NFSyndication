@@ -12,6 +12,7 @@ import logging
 import pytz
 import sys
 import logging
+from . import parser
 
 from jinja2.exceptions import UndefinedError
 from . import parser
@@ -21,7 +22,7 @@ logging.basicConfig(format='%(message)s', datefmt='%I:%M', level=logging.DEBUG)
 
 args = parser.parse_args()
 
-argsFilename = args.filename
+#argsFilename = args.filename
 
 # Get a list of feed URLs
 try:
@@ -30,7 +31,7 @@ try:
     print('Loading feeds.txt')
 except FileNotFoundError:   # If you don't have 'feeds.txt' in specified path, you can specify one (nfsyndication-src --filename=sample.txt)
  try:
-  for documentList in argsFilename:
+  for documentList in args.filename:
    with open(documentList) as f:
     SUBSCRIPTIONS = list(f)
    print('Loading file: ' + documentList)

@@ -10,7 +10,7 @@ __version__ = '.'.join(map(str,__version_info__))
 
 __base_path__ = 'feeds.txt'
 
-parser = argparse.ArgumentParser(description='News Feed Syndication {} - A package that read and fetch RSS feeds from the publications.'.format(__version__))
+parser = argparse.ArgumentParser(description='News Feed Syndication - A package that read and fetch RSS feeds from the publications.')
 parser.add_argument("-V",
         "--version",
         action="store_true",
