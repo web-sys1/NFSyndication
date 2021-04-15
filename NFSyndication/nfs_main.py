@@ -20,8 +20,6 @@ from . import parser
 from .extras import fetch_content, templateContent, process_entry
 from .styles import cssTextDecoded
 
-logging.basicConfig(format='%(message)s', datefmt='%I:%M', level=logging.DEBUG)
-
 args = parser.parse_args()
 
 #argsFilename = args.filename
