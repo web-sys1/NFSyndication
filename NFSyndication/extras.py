@@ -11,7 +11,6 @@ from datetime import datetime, timedelta
 #def format_datetime(struct_time):
     #return datetime.fromtimestamp(mktime(struct_time))
 import colorful as cf
-import os
 import logging
 import os
 import json
@@ -163,24 +162,16 @@ class ExtendedPost(NamedTuple):
   body: str
   permalink:str
 
-<<<<<<< Updated upstream
-def exist_template():
-=======
 def check_template():
->>>>>>> Stashed changes
   path_dest = os.path.realpath(__file__)
   parent_directory = os.path.dirname(path_dest)
   for root, dirs, files in os.walk(parent_directory):
     for file in files:
         if file == 'template.html':
             template_root = os.path.join(root, file)
-<<<<<<< Updated upstream
-  print("Template file?: {}".format(os.path.isfile(template_root)))
-=======
             print("Template file {}?: {} {}".format(root, file, os.path.isfile(template_root)))
         else:
             print("Template file?: {} result is {boolean}".format(root, boolean=False))
->>>>>>> Stashed changes
 
 def process_entry(entry, blog):
     """
