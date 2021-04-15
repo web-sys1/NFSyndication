@@ -15,7 +15,7 @@ Use `pip install pip --upgrade` to upgrade pip. Check pip version with
 
 0.2.23
 ------
-What's new
+What's new (15 April 2021)
 ...........
 - Re-arrange code: moving process_entry() and its initials from nfs_main to extras.py
 - Extablishing arguments.
@@ -25,12 +25,18 @@ What's new
 
 0.2.22
 ------
+March 2021
+..........
 - Upgrading the dependencies.
 
 0.2.20
 -------
+September 2020
+..............
 - Another version release: removing from `NFSyndication.module` import `same_module` as known parent package is already opted-in. Always include module.
 
 0.2.0
 ----------
+August 2020
+............
 - Starting project: deploy python package to PyPi.
