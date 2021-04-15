@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding=utf-8
 import os
+from os.path import abspath, realpath, split, dirname
 import collections
 from datetime import datetime, timedelta
 import time
@@ -16,7 +17,8 @@ from . import parser
 
 from jinja2.exceptions import UndefinedError
 from . import parser
-from .extras import process_entry, fetch_content
+from .extras import fetch_content, templateContent, process_entry
+from .styles import cssTextDecoded
 
 logging.basicConfig(format='%(message)s', datefmt='%I:%M', level=logging.DEBUG)
 
@@ -72,14 +74,23 @@ except NameError:
 if args.outputJSON:
       with open(args.outputJSON, 'w', encoding='utf8') as outf:
            json.dump(outJSONFeed, outf, ensure_ascii=False, indent=4)
-
+  
 # Get the template, and drop in the posts
-dir_path = os.path.dirname(os.path.realpath(__file__))
-with open(f'{dir_path}/templates/template.html', encoding='utf8') as f:
-    print("\nChecking template...")
-    template = jinja2.Template(f.read())
+dir_path = os.path.split(os.path.realpath(__file__))[0]
 
-# When done, it converts to HTML.
-with open(f'output/index.html', 'w', encoding='utf8') as f:
-    f.write(template.render(posts=posts, time=datetime.now()))
-    print('Successful.')
+try:
+ with open(f'{dir_path}/templates/template.html', encoding='utf8') as f:
+    print("\nChecking original template file...")
+    template = jinja2.Template(f.read())
+ with open(f'output/index.html', 'w', encoding='utf8') as f:
+      f.write(template.render(posts=posts, time=datetime.now()))
+      print('Successful.')   
+ with open("output/style.css", 'w') as f:
+    f.write(cssTextDecoded)
+
+except FileNotFoundError:
+    template = jinja2.Template(templateContent)
+# When done, it converts to HTML
+    with open(f'output/index.html', 'w', encoding='utf8') as f:
+      f.write(template.render(cssText=cssTextDecoded, posts=posts, time=datetime.now()))
+      print('Successful.')

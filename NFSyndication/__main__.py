@@ -16,7 +16,6 @@ verbose = False
 
 args = parser.parse_args()
 
-
 def exec_wrapper(func):
     """This decorator prints the execution time for the decorated function."""
 
@@ -71,4 +70,3 @@ elif args.verbose == 3:
 
 if __name__ == '__main__':
     run()
-

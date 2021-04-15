@@ -14,7 +14,7 @@ cfail = cf.bold_red
 def init():
   logging.info("Fetching...")
   try:
-   from . import nfs_main, styles
+    from . import nfs_main
   except Exception as e:
     exception = cfail(
                   "Error while parsing: {exceptname}: {errmessage}".format(exceptname=str(e.__class__.__name__), errmessage=e)

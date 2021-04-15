@@ -3,9 +3,12 @@ import pytest
 import subprocess
 import pytest
 from NFSyndication import __main__ as NFS_init
+from NFSyndication import parser as PS
 # test@
+# Change the action associated with your option to action='store'
+"""
 def test_conf():
-    """ We use these conditions to check the statement"""
+    #We use these conditions to check the statement
     subscriptions = [
      'http://feedpress.me/512pixels',
      'http://www.leancrew.com/all-this/feed/',
@@ -17,5 +20,17 @@ def test_conf():
     return NFS_init.run()
     
 def test_entrypoint():
-    """Then initialize code."""
+    #Then initialize code
     return test_conf()
+    
+def pytest_configure():
+    pytest.something = test_entrypoint()
+"""
+
+@pytest.fixture
+def test_client():
+    configure_app(flask_app, config_name=Environments.TESTS)
+    # I use this a lot for custom Test client classes to inject custom things
+    my_project.app.test_client_class = CustomApiTestClient
+    client = ''
+    yield client

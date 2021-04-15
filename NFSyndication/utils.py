@@ -49,4 +49,3 @@ class GetFeedStaticData(object):
                 feeds = self.feeds
             )
             file.write(html)
-       

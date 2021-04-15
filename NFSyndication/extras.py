@@ -13,6 +13,7 @@ from datetime import datetime, timedelta
 import colorful as cf
 import os
 import logging
+import os
 import json
 import pytz
 import sys
@@ -95,7 +96,53 @@ def fetch_content(url):
     except Exception as e:
       print(e.__class__.__name__)
 
+templateContent = """
+<html>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+<style type="text/css">
+ {{ cssText }}
+</style>
+<title>News Topics: Today’s RSS</title>
+<body>
+  <aside>
+    <div id="header_text"><h1><a href="javascript:window.location.reload()">News Stories</a></h1></div>
+  </aside>
+  <ul class="rss">
+  {% for post in posts|sort|reverse %}
+  <li>
+    <div class="article_title">
+      <h3 class="{% if post.permalink %}link{% else %}full{% endif %}post_title"><a href="{{ post.link }}">{{ post.title }}</a>{% if post.permalink %} <span class="linkpost_arrow">→</span>{% endif %}</h3>
+    </div>
+    <div class="article_meta"><p>
+      On {{ post.time.strftime('%d %B %Y').strip('') }} at {{ post.time.strftime('%I:%M&thinsp;%p').strip('').lower() }}
+      • {{ post.blog }}
+      {% if post.author and post.blog != post.author %}
+        • by {{ post.author }}
+      {% endif %}
+      {% if post.permalink %}
+       • <span class="permalink"><a href="{{ post.permalink }}">∞</a></span>
+      {% endif %}
+    </p></div>
+    {{ post.body|safe }}
 
+    {# Put a line between posts, but only if this isn't the last one #}
+    {% if loop.index != posts|count %}<hr class="between_posts"/>{% endif %}
+  </li>
+  {% endfor %}
+  </ul>
+  <footer>
+    <p>
+        Last updated on {{ time.strftime('%d %B %Y').strip('') }} at {{ time.strftime('%I:%M&thinsp;%p').strip('').lower() }}.
+        Made with Python app & Jinja2 (based on script by configuration of the project)
+    </p>
+  </footer>
+</body>
+</html>
+"""
 
 class Post(NamedTuple):
   time: str
@@ -116,14 +163,24 @@ class ExtendedPost(NamedTuple):
   body: str
   permalink:str
 
+<<<<<<< Updated upstream
 def exist_template():
+=======
+def check_template():
+>>>>>>> Stashed changes
   path_dest = os.path.realpath(__file__)
   parent_directory = os.path.dirname(path_dest)
   for root, dirs, files in os.walk(parent_directory):
     for file in files:
         if file == 'template.html':
             template_root = os.path.join(root, file)
+<<<<<<< Updated upstream
   print("Template file?: {}".format(os.path.isfile(template_root)))
+=======
+            print("Template file {}?: {} {}".format(root, file, os.path.isfile(template_root)))
+        else:
+            print("Template file?: {} result is {boolean}".format(root, boolean=False))
+>>>>>>> Stashed changes
 
 def process_entry(entry, blog):
     """

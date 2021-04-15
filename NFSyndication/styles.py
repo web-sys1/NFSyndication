@@ -302,5 +302,3 @@ for rule in sheet:
 # cssutils.ser.prefs.resolveVariables == True since 0.9.7b2
 cssTextDecoded = sheet.cssText.decode('ascii')
 #print(cssTextDecoded)
-with open("output/style.css", 'w') as f:
-    f.write(cssTextDecoded)
