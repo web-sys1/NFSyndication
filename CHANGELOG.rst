@@ -3,7 +3,7 @@ Changelog for NFSyndication (aka News Feed Syndication)
 ======================================================
 
 A summary of changes in the NFSyndication. For more detailed
-information, see [GitHub](https://github.com/web-sys1/NFSyndication).
+information, see REPOSITORY_.
 
 Use `pip install NFSyndication --upgrade` or `conda upgrade NFSy` to
 upgrade to the latest release.
@@ -40,3 +40,5 @@ September 2020
 August 2020
 ............
 - Starting project: deploy python package to PyPi.
+
+.. _REPOSITORY: https://github.com/web-sys1/NFSyndication/
