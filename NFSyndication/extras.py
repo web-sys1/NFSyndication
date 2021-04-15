@@ -11,6 +11,7 @@ from datetime import datetime, timedelta
 #def format_datetime(struct_time):
     #return datetime.fromtimestamp(mktime(struct_time))
 import colorful as cf
+import os
 import logging
 import json
 import pytz
@@ -115,6 +116,14 @@ class ExtendedPost(NamedTuple):
   body: str
   permalink:str
 
+def exist_template():
+  path_dest = os.path.realpath(__file__)
+  parent_directory = os.path.dirname(path_dest)
+  for root, dirs, files in os.walk(parent_directory):
+    for file in files:
+        if file == 'template.html':
+            template_root = os.path.join(root, file)
+     print(os.path.isfile(template_root))
 
 def process_entry(entry, blog):
     """
