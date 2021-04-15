@@ -123,7 +123,7 @@ def exist_template():
     for file in files:
         if file == 'template.html':
             template_root = os.path.join(root, file)
-     print(os.path.isfile(template_root))
+  print("Template file?: {}".format(os.path.isfile(template_root)))
 
 def process_entry(entry, blog):
     """
