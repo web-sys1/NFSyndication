@@ -17,11 +17,11 @@ Use `pip install pip --upgrade` to upgrade pip. Check pip version with
 ------
 What's new (15 April 2021)
 ...........
-- Re-arrange code: moving process_entry() and its initials from nfs_main to extras.py
+- Re-arrange code: moving ``process_entry()`` and its initials from ``nfs_main`` to extras.py
 - Extablishing arguments.
-- Extablish `__main__.py` file. Adjust script snippets.
-- More args to come: outputJSON, comparator_filter.
-- Upcoming NamedTuple classes: 'ExtendedPost' and 'Post' tuples into class operator (NamedTuple).
+- Extablish ``__main__.py`` file. Adjust script snippets.
+- More args to come: ``outputJSON``, ``comparator_filter``.
+- Upcoming NamedTuple classes: 'ExtendedPost' and 'Post' tuples into class operator (``NamedTuple``).
 
 0.2.22
 ------
@@ -33,7 +33,7 @@ March 2021
 -------
 September 2020
 ..............
-- Another version release: removing from `NFSyndication.module` import `same_module` as known parent package is already opted-in. Always include module.
+- Another version release: removing from ``NFSyndication.module`` import ``same_module`` as known parent package is already opted-in. Always include module.
 
 0.2.0
 ----------
