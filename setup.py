@@ -10,8 +10,6 @@ with open("README.rst", "r") as fh:
 
 install_reqs = [req for req in open(abspath(join(dirname(__file__), 'requirements.txt')))]
 
-extra_testrequirements = [req for req in open(abspath(join(dirname(__file__), 'requirements-test.txt')))]
-
 setup(
     name = "NFSyndication",
     version = pkgversion,
@@ -29,7 +27,7 @@ setup(
     author_email = "web.system.management@gmail.com",
     install_requires=install_reqs,
     extras_require = {
-        'test': extra_testrequirements,
+        'test': ['multipart', 'flask', 'pre-commit', 'pytest', 'pytest-cov', 'pigments', 'requests-toolbelt', 'responses>=0.11.0', 'tornado', 'twine']
         },
     license = "GNU GPL",
     keywords = "rss, news",
