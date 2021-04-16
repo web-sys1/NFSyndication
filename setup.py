@@ -8,17 +8,9 @@ from NFSyndication import __version__ as pkgversion
 with open("README.rst", "r") as fh:
     long_description = fh.read()
 
-install_reqs = [
-   "colorama==0.4.4",
-   "colorful==0.5.4",
-   "cssutils",
-   "feedparser==6.0.2",
-   "Jinja2==2.11.3",
-   "MarkupSafe==0.23",
-   "configparser==5.0.2",
-   "pytz>=2017.2",
-   "wheel==0.24.0",
-]
+install_reqs = [req for req in open(abspath(join(dirname(__file__), 'requirements.txt')))]
+
+extra_testrequirements = [req for req in open(abspath(join(dirname(__file__), 'requirements-test.txt')))]
 
 setup(
     name = "NFSyndication",
@@ -37,7 +29,7 @@ setup(
     author_email = "web.system.management@gmail.com",
     install_requires=install_reqs,
     extras_require = {
-        'test': ['multipart', 'flask', 'pre-commit', 'pytest', 'pytest-cov', 'pigments', 'requests-toolbelt', 'responses>=0.11.0', 'tornado', 'twine']
+        'test': extra_testrequirements,
         },
     license = "GNU GPL",
     keywords = "rss, news",
