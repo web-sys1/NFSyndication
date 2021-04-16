@@ -12,10 +12,6 @@ from functools import wraps
 
 handler = logging.StreamHandler()
 
-verbose = False
-
-args = parser.parse_args()
-
 def exec_wrapper(func):
     """This decorator prints the execution time for the decorated function."""
 
