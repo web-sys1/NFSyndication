@@ -1,13 +1,14 @@
 language: python
 # Technically we work on 3.3 as well, but hypothesis doesn't...
 python:
+  - "3.6"
   - "3.7"
   - "3.8"
 # command to install dependencies
 before_install:
   - pip install colorful
 install:
-  - python setup.py install
-  #- pip install -e ".[test]"
+  #- python setup.py install
+  - pip install -e ".[test]"
 # command to run tests
-script: pytest tests/conftest.py
+script: py.test

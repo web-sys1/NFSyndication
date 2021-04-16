@@ -5,7 +5,7 @@ import sys
 import logging
 from distutils.util import strtobool
 
-__version_info__ = (0,2,23)
+__version_info__ = (0,2,25)
 __version__ = '.'.join(map(str,__version_info__))
 
 __base_path__ = 'feeds.txt'
