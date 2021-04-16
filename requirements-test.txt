@@ -2,6 +2,7 @@
 multipart
 pre-commit
 pytest
+flask
 pytest-cov
 requests-toolbelt
 responses>=0.10.1,<0.11.0
