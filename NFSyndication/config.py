@@ -4,10 +4,10 @@ import logging
 import colorful as cf
 from jinja2 import Template, Environment, FileSystemLoader
 from jinja2.exceptions import *
-from feedparser import parse as parseURL
 import json
 import os
 import shutil
+from .extras import parseFeedURL
 
 cfail = cf.bold_red
 
@@ -55,7 +55,7 @@ class GetFeedDataPerConfiguration(object):
         for url in URLs:
           try:
             print(f"Fetching {url}")
-            self.feedURL = parseURL(url)
+            self.feedURL = parseFeedURL(url)
             self.feeds.append(self.feedURL)
             fetch_content(url)
           except Exception as er:

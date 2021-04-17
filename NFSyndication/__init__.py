@@ -1,11 +1,17 @@
 #!/usr/bin/python 
 # -*- coding: utf-8 -*-
+
+# This is a set of scripts for aggregating RSS feeds as originally written as "Simpler Syndication" by Dr. Drang some years ago.
+# This is NFSyndication's entire file.
+# This file is used to proceed initialization, such as arguments.
+
 import argparse
 import sys
 import logging
+
 from distutils.util import strtobool
 
-__version_info__ = (0,2,25)
+__version_info__ = (0,2,23)
 __version__ = '.'.join(map(str,__version_info__))
 
 __base_path__ = 'feeds.txt'
@@ -22,3 +28,5 @@ parser.add_argument('-f','--filename',help="specify which file type to use (for 
 parser.add_argument('--outputJSON', help='Save feeds to output file JSON format.')
 parser.add_argument("--comparator-filter", type=lambda x:bool(strtobool(x)),
        nargs='?', help='Enable the comparator. This will randomly ignore stale RSS feeds from the rendering output HTML.', const=True, default=False)
+       
+args = parser.parse_args()

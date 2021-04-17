@@ -1,16 +1,18 @@
-# encoding = utf-8
+# -*- coding: utf-8 -*-
+
 """
 This file contains the logic for filtering/munging posts.  It's kept in
 a separate file from the main feed parsing logic so the commit history
 for nfs_main.py doesn't get polluted with nitpicks and tweaks.
-
 """
+
 import collections
 from datetime import datetime, timedelta
 #from time import mktime
 #def format_datetime(struct_time):
     #return datetime.fromtimestamp(mktime(struct_time))
 import colorful as cf
+import feedparser
 import logging
 import os
 import json
@@ -19,18 +21,14 @@ import sys
 import time
 from typing import NamedTuple
 from configparser import ConfigParser
-
 from colorama import init, Fore, Back, Style
-from . import parser
-
-argcomp = parser.parse_args()
 
 init(convert=True)
 
 config = ConfigParser()
 
 # Date and time setup. I want only posts from "today" and "yesterday",
-# where the day lasts until 2 AM.
+# where the day lasts until 2 AM at Standard Time.
 TIMEZONE = config.get(section='default', option='timezone', fallback='GMT')
 
 # Get the current time in the home timezone, then step back to include
@@ -43,9 +41,12 @@ else:
     dt -= timedelta(hours=48)
 start = dt.replace(hour=0, minute=0, second=0, microsecond=0)
 
+def parseFeedURL(url):
+ return feedparser.parse(url)
+
 # Convert this time back into UTC.
 utc = pytz.utc
-START = start.astimezone(utc) 
+START = start.astimezone(utc)
 
 # List of keywords to filter
 FILTER_WORDS = ['*']
@@ -54,10 +55,9 @@ cfail = cf.bold_red
 cfhighlight = cf.bold_blue
 
 def fetch_content(url):
-   import feedparser
    feedJSON = []
    try:
-    feed = feedparser.parse(url)
+    feed = parseFeedURL(url)
     feedJSON.append(feed)
     print("\nFeed title:", feed.feed.title or None)
     print("Link:", feed.feed.link or None)
@@ -91,7 +91,9 @@ def fetch_content(url):
    finally:
     try:
      feedHeaders = json.dumps(feed.headers, indent=4, sort_keys=True)
-     logging.info('Output headers JSON: \n' + feedHeaders)
+     logging.info('Doing...')
+     logging.info('Looking for URL: {}'.format(url))
+     logging.info('Output headers JSON: \n' + feedHeaders + '\n')
     except Exception as e:
       print(e.__class__.__name__)
 
@@ -173,25 +175,29 @@ def check_template():
         else:
             print("Template file?: {} result is {boolean}".format(root, boolean=False))
 
-def process_entry(entry, blog):
+def process_entry(entry, blog, comp_field=False):
     """
     Coerces an entry from feedparser into a Post tuple.
     Returns None if the entry should be excluded.
     """
-    # Get the date of the post.  If it was published more than two days
-    # ago, drop the entry. Now, the feed entries is being analyzed and processed before reading in SUBSCRIPTIONS.
+    # Get the date of the post. If it was published more than two days
+    # ago, drop the entry. Now, the feed entries is being read, analyzed and processed before being listed in SUBSCRIPTIONS.
     try:
         when = entry['updated_parsed']
     except KeyError:
         when = entry['published_parsed']
+    # 'when' is familiarized in Coordinated Universal Time (UTC). More information can be found on https://en.wikipedia.org/wiki/Coordinated_Universal_Time
     when = utc.localize(datetime.fromtimestamp(time.mktime(when)))
-    
-    if argcomp.comparator_filter:
+
+    """
+    Having the comp_field enabled (set to True), this would be able to get rid of outdated RSS feeds.
+    """
+    if bool(comp_field)==True:
       if when < START:
-        return  
+        return
 
     title = entry['title']
-    
+
     try:
         author = entry['author']
     except KeyError:
@@ -201,7 +207,7 @@ def process_entry(entry, blog):
         body = entry['content'][0]['value']
     except KeyError:
         body = entry['summary']
-            
+
     postField = Post(when, blog, title, author, link, body)
     return normalise_post(postField)
     

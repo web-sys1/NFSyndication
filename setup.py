@@ -19,7 +19,7 @@ setup(
             'nfsyndication-src = NFSyndication.__main__:run',
          ]
         },
-    package_data = {'NFSyndication': ['templates/**/*.*']},
+    package_data = {'NFSyndication': ['templates/_layout.html', 'templates/**/*.*']},
     description= "News Feed Syndication - A package that read and fetch RSS feeds from the publications.",
     long_description=long_description,
     long_description_content_type="text/x-rst",
@@ -29,7 +29,7 @@ setup(
     extras_require = {
         'test': ['multipart', 'flask', 'pre-commit', 'pytest', 'pytest-cov', 'pigments', 'requests-toolbelt', 'responses>=0.11.0', 'tornado', 'twine']
         },
-    license = "GNU GPL",
+    license = "BSD-2-Clause",
     keywords = "rss, news",
     project_urls={ 
         'Source': 'https://github.com/web-sys1/NFSyndication/'
@@ -39,12 +39,13 @@ setup(
         'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: GNU Library or Lesser General Public License (LGPL)',
+        'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
-        'Topic :: Internet',
+        'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Topic :: Text Processing :: Markup :: HTML'
         ]

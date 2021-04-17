@@ -1,29 +1,29 @@
-#!/usr/bin/env python
-# coding=utf-8
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 import os
 from os.path import abspath, realpath, split, dirname
 import collections
 from datetime import datetime, timedelta
 import time
 
-import feedparser
 import jinja2
 import json
 import logging
 import pytz
+import shutil
 import sys
 import logging
-from . import parser
 
 from jinja2.exceptions import UndefinedError
-from . import parser
-from .extras import fetch_content, templateContent, process_entry
+from . import args
+from .extras import parseFeedURL, fetch_content, templateContent, process_entry
 from .styles import cssTextDecoded
 
-args = parser.parse_args()
+from .__main__ import logFile
 
 #argsFilename = args.filename
-
+standardPath = os.getcwd()
 # Get a list of feed URLs
 try:
  with open('feeds.txt') as f:
@@ -32,9 +32,14 @@ try:
 except FileNotFoundError:   # If you don't have 'feeds.txt' in specified path, you can specify one (nfsyndication-src --filename=sample.txt)
  try:
   for documentList in args.filename:
+   if not os.path.exists('output'):
+     os.mkdir('output')
+   elif os.path.exists('output'):
+     shutil.rmtree('output')
+     os.mkdir('output')
    with open(documentList) as f:
     SUBSCRIPTIONS = list(f)
-   print('Loading file: ' + documentList)
+    print('Loading file: ' + documentList)
  except TypeError:
    raise Exception('NFSyndication [ERROR]: feeds.txt not found. See `nfsyndication-src --help` for more.')
 
@@ -44,21 +49,23 @@ outJSONFeed= []
 try:
  for url in SUBSCRIPTIONS:
     try:
-        feed = feedparser.parse(url)
+        feed = parseFeedURL(url)
         blog = feed['feed']['title']
     except KeyError:
         if args.verbose and feed.bozo:
             logging.error("Feed data summary on URL {}".format(url))
+            logging.error("Failed command: {} ".format(sys.argv[0:]))
             logging.error("Exception [{bozo_exception}]: {bozo_message}".format(bozo_exception=str(feed.bozo_exception.__class__.__name__), bozo_message=str(feed.bozo_exception)))
+            logging.error('Response code is: {}'.format(feed.status))
             if (hasattr(feed.bozo_exception, 'getLineNumber') and hasattr(feed.bozo_exception, 'getMessage')):
                 line = feed.bozo_exception.getLineNumber()
                 logging.error('Line %d: %s', line, feed.bozo_exception.getMessage())
-                
+            logging.error('Writing output logs to {}'.format(os.path.join(standardPath, logFile)))    
         raise Exception(f"[{feed.bozo_exception}] (code {feed.status}) \n{(f'Could not fetch URL(s): {url}')}")
         sys.exit(-1)
         continue
     for entry in feed['entries']:
-        post = process_entry(entry, blog)
+        post = process_entry(entry, blog, comp_field=args.comparator_filter)
         if post:
             posts.append(post)
             outJSONFeed.append(feed)
