@@ -2,8 +2,7 @@ import os, glob
 import pytest
 import subprocess
 import pytest
-from NFSyndication import __main__ as NFS_init
-from NFSyndication import parser as PS
+from NFSyndication import init as NFS_init
 # test@
 # Change the action associated with your option to action='store'
 
@@ -17,7 +16,7 @@ def test_conf():
   
     with open(f'feeds.txt', 'w', encoding='utf8') as f:
      f.write(",".join(subscriptions).replace(',', '\n'))
-    return NFS_init.run()
+    return NFS_init()
     
 def test_entrypoint():
     #Then initialize code

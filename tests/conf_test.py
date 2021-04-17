@@ -2,8 +2,8 @@ import os, glob
 import pytest
 import subprocess
 import pytest
-from NFSyndication import __main__ as NFS_init
-from NFSyndication import parser as PS
+from NFSyndication import init
+
 # test@
 import logging
 
