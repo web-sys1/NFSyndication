@@ -6,6 +6,7 @@ from os.path import abspath, realpath, split, dirname
 import collections
 from datetime import datetime, timedelta
 import time
+import click
 
 import jinja2
 import json
@@ -16,7 +17,7 @@ import sys
 import logging
 
 from jinja2.exceptions import UndefinedError
-from . import args
+from .cli import args
 from .extras import parseFeedURL, fetch_content, templateContent, process_entry
 from .styles import cssTextDecoded
 
@@ -27,19 +28,15 @@ standardPath = os.getcwd()
 # Get a list of feed URLs
 try:
  with open('feeds.txt') as f:
-    SUBSCRIPTIONS = list(f)
-    print('Loading feeds.txt')
+     SUBSCRIPTIONS = list(f)
+     print('Loading feeds.txt')
 except FileNotFoundError:   # If you don't have 'feeds.txt' in specified path, you can specify one (nfsyndication-src --filename=sample.txt)
  try:
   for documentList in args.filename:
-   if not os.path.exists('output'):
-     os.mkdir('output')
-   elif os.path.exists('output'):
-     shutil.rmtree('output')
-     os.mkdir('output')
+   parent_location = os.getcwd()
    with open(documentList) as f:
-    SUBSCRIPTIONS = list(f)
-    print('Loading file: ' + documentList)
+     SUBSCRIPTIONS = list(f)
+     print("Loading file: {} from '{}'".format(documentList, os.path.join(parent_location)))
  except TypeError:
    raise Exception('NFSyndication [ERROR]: feeds.txt not found. See `nfsyndication-src --help` for more.')
 
@@ -60,7 +57,7 @@ try:
             if (hasattr(feed.bozo_exception, 'getLineNumber') and hasattr(feed.bozo_exception, 'getMessage')):
                 line = feed.bozo_exception.getLineNumber()
                 logging.error('Line %d: %s', line, feed.bozo_exception.getMessage())
-            logging.error('Writing output logs to {}'.format(os.path.join(standardPath, logFile)))    
+            logging.error('[NFSyndication] Writing output logs to {}'.format(os.path.join(standardPath, logFile)))    
         raise Exception(f"[{feed.bozo_exception}] (code {feed.status}) \n{(f'Could not fetch URL(s): {url}')}")
         sys.exit(-1)
         continue
@@ -77,8 +74,9 @@ except NameError:
   pass
 
 if args.outputJSON:
-      with open(args.outputJSON, 'w', encoding='utf8') as outf:
-           json.dump(outJSONFeed, outf, ensure_ascii=False, indent=4)
+    with open(args.outputJSON, 'w', encoding='utf8') as outf:
+       json.dump(outJSONFeed, outf, ensure_ascii=False, indent=4)
+      
   
 # Get the template, and drop in the posts
 dir_path = os.path.split(os.path.realpath(__file__))[0]

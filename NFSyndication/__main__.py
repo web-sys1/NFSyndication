@@ -6,13 +6,14 @@ import time
 import logging.handlers
 from . import __version__, __base_path__
 from . import config
-from . import args
+from .cli import args
 from colorama import init, Fore, Back, Style
 
 from functools import wraps
 
 init(convert=True)
 
+pathCwd = os.getcwd()
 handler = logging.StreamHandler()
 
 def exec_wrapper(func):
@@ -34,14 +35,9 @@ if args.version:
 
 @exec_wrapper
 def run():
-  try:
-   #logger.setLevel(logging.DEBUG)
    if os.path.isfile(__base_path__) and os.access(__base_path__, os.R_OK):
-    os.mkdir('output')
-  except FileExistsError:
-    # directory already exists
-   pass
-  return config.init()
+      print('You are in directory ' + os.path.join(pathCwd))
+   return config.init()
 
 #logging.StreamHandler()
 #logger = logging.getLogger()

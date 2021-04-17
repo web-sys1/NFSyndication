@@ -13,6 +13,11 @@ cfail = cf.bold_red
 
 def init():
   logging.info("Fetching...")
+  if not os.path.exists('output'):
+     os.mkdir('output')
+  elif os.path.exists('output'):
+     shutil.rmtree('output')
+     os.mkdir('output')
   try:
     from . import nfs_main
   except Exception as e:
