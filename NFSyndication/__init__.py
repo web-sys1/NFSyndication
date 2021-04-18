@@ -12,7 +12,7 @@ import logging
 from .extras import process_entry, fetch_content
 from .config import GetFeedDataPerConfiguration, init
 
-__version_info__ = (0,2,23)
+__version_info__ = (0,2,25)
 __version__ = '.'.join(map(str,__version_info__))
 
 __base_path__ = 'feeds.txt'
