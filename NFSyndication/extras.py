@@ -20,7 +20,7 @@ import pytz
 import sys
 import time
 from typing import NamedTuple
-from configparser import ConfigParser
+from backports.configparser import ConfigParser
 from colorama import init, Fore, Back, Style
 
 init(convert=True)
