@@ -3,11 +3,14 @@ import pytest
 import subprocess
 import pytest
 from NFSyndication import init as NFS_init
+from NFSyndication.core import args
+
 # test@
 # Change the action associated with your option to action='store'
 
 def test_conf():
     #We use these conditions to check the statement
+    args.outputJSON = "feed-output.json"
     subscriptions = [
      'http://feedpress.me/512pixels',
      'http://www.leancrew.com/all-this/feed/',
@@ -21,6 +24,3 @@ def test_conf():
 def test_entrypoint():
     #Then initialize code
     return test_conf()
-    
-def pytest_configure():
-    pytest.something = test_entrypoint()

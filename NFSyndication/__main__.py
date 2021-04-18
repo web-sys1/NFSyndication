@@ -6,7 +6,7 @@ import time
 import logging.handlers
 from . import __version__, __base_path__
 from . import config
-from .cli import args
+from .core import args
 from colorama import init, Fore, Back, Style
 
 from functools import wraps

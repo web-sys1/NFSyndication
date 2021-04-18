@@ -17,7 +17,7 @@ import sys
 import logging
 
 from jinja2.exceptions import UndefinedError
-from .cli import args
+from .core import args
 from .extras import parseFeedURL, fetch_content, templateContent, process_entry
 from .styles import cssTextDecoded
 
@@ -25,6 +25,7 @@ from .__main__ import logFile
 
 #argsFilename = args.filename
 standardPath = os.getcwd()
+
 # Get a list of feed URLs
 try:
  with open('feeds.txt') as f:
@@ -74,7 +75,7 @@ except NameError:
   pass
 
 if args.outputJSON:
-    with open(args.outputJSON, 'w', encoding='utf8') as outf:
+    with open(args.outputJSON, 'w+', encoding='utf8') as outf:
        json.dump(outJSONFeed, outf, ensure_ascii=False, indent=4)
       
   
