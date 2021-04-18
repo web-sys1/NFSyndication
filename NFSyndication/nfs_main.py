@@ -6,7 +6,6 @@ from os.path import abspath, realpath, split, dirname
 import collections
 from datetime import datetime, timedelta
 import time
-import click
 
 import jinja2
 import json
