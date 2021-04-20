@@ -18,7 +18,7 @@ Use `pip install pip --upgrade` to upgrade pip. Check pip version with
 .............
 - Fixing background faults, by giving further improvements. See ``NFSyndication/nfs_main.py`` and ``extras.py`` (diff-`a63e8a220f8551cd5dba8c5ff9fb0fd82f0478a6e4fa432caf11c22f85427061`_)
 - Improving additional logging output (on ``nfsyndication-src --verbose`` output command).
-- Establishing ``core`` path, before argument assets. Then, merge them to the new target.
+- Establishing ``core`` path, before argument param assets. Then, merge them to the new target.
 
 
 .. _a63e8a220f8551cd5dba8c5ff9fb0fd82f0478a6e4fa432caf11c22f85427061: https://github.com/web-sys1/NFSyndication/commit/7011cf3249cee8f2800a192b87f6c80eb1d10fb3#diff-a63e8a220f8551cd5dba8c5ff9fb0fd82f0478a6e4fa432caf11c22f85427061
