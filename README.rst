@@ -68,6 +68,12 @@ Otherwise, you should do that through **Python** code:
 
   """Then initialize code."""
   entry_point()
+  
+If you wish to do another way instead of feeds.txt, you should use pass filename to upload list of the feeds. Then run:
+
+.. code:: bash
+
+   nfsyndication-src --filename=path/to/feeds.txt
 
 .. note:: Assuming nothing goes wrong, the posts will be written to ``HTML`` file.
 
