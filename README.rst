@@ -51,7 +51,7 @@ Otherwise, you should do that through **Python** code:
   
     with open(f'feeds.txt', 'w', encoding='utf8') as f:
      f.write(",".join(subscriptions).replace(',', '\n'))
-    return NFS_init.init()
+    return NFS_init()
 
   """Then initialize code."""
   entry_point()
