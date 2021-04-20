@@ -1,6 +1,6 @@
 """ 
  Setup for NFSyndication
- See https://packaging.python.org/guides/distributing-packages-using-setuptools/
+ See https://packaging.python.org/guides/distributing-packages-using-setuptools/ on how to package and share Python projects to PyPa
 """
 
 from os.path import dirname, abspath, join, exists
