@@ -4,6 +4,19 @@ News Feed Syndication
    
 .. image:: https://travis-ci.org/web-sys1/NFSyndication.svg?branch=master
    :target: https://travis-ci.org/web-sys1/NFSyndication
+
+.. image:: https://img.shields.io/pypi/v/NFSyndication.svg
+   :target: `PyPI link`_
+
+.. image:: https://img.shields.io/pypi/pyversions/NFSyndication.svg
+   :target: `PyPI link`_
+
+.. _PyPI link: https://pypi.org/project/NFSyndication
+
+.. image:: https://github.com/web-sys1/NFSyndication/workflows/CodeQL/badge.svg
+   :target: https://github.com/web-sys1/NFSyndication/actions?query=workflow%3ACodeQL++
+   :alt: tests
+
      
 This is a set of scripts for aggregating RSS feeds.
 
