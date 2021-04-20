@@ -35,15 +35,15 @@ Run the command:
    News Feed Syndication - A package that read and fetch RSS feeds from the publications.
 
    optional arguments:
-    -h, --help            show this help message and exit
-    -V, --version         Print the package version and quit
-    -v, --verbose         Show verbose messages
-    -f FILENAME [FILENAME ...], --filename FILENAME [FILENAME ...]
-                        specify which file type to use (for example: nfsyndication-src --filename=./path/to/sample.file.txt)
-    --outputJSON OUTPUTJSON
-                        Save feeds to output file JSON format.
-    --comparator-filter [COMPARATOR_FILTER]
-                        Enable the comparator. This will randomly ignore stale RSS feeds from the rendering output HTML.
+     -h, --help            show this help message and exit
+     -V, --version         Print the package version and quit
+     -v, --verbose         Show verbose messages
+     -f FILENAME [FILENAME ...], --filename FILENAME [FILENAME ...]
+                           specify which file type to use (for example: nfsyndication-src --filename=./path/to/sample.file.txt)
+     --outputJSON OUTPUTJSON
+                           Save feeds to output file JSON format.
+     --comparator-filter [COMPARATOR_FILTER]
+                           Enable the comparator. This will randomly ignore stale RSS feeds from the rendering output HTML.
    
 Otherwise, you should do that through **Python** code:
 
