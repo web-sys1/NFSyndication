@@ -1,6 +1,8 @@
-""" Setup for NFSyndication
- See: https://packaging.python.org/guides/distributing-packages-using-setuptools/
+""" 
+ Setup for NFSyndication
+ See https://packaging.python.org/guides/distributing-packages-using-setuptools/
 """
+
 from os.path import dirname, abspath, join, exists
 from setuptools import setup, find_packages
 from NFSyndication import __version__ as pkgversion
