@@ -15,6 +15,3 @@ parser.add_argument("--comparator-filter", type=lambda x:bool(strtobool(x)),
        nargs='?', help='Enable the comparator. This will randomly ignore stale RSS feeds from the rendering output HTML.', const=True, default=False)
        
 args = parser.parse_args()
-
-if __name__ == "__main__":
-    main()
