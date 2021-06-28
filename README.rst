@@ -26,7 +26,7 @@ This is a set of scripts for aggregating RSS feeds.
 Installation
 ------------
 
-You can install package through the line command:
+You can install the package through the line command:
 
 .. code:: bash
 
